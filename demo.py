@@ -4,14 +4,17 @@ from github_query.github_graphql.client import Client
 from github_query.queries.repositories.repository_contributors import RepositoryContributors
 from github_query.queries.repositories.repository_contributors_contribution import RepositoryContributorsContribution
 from github_query.queries.repositories.repository_commits import RepositoryCommits
+from dotenv import load_dotenv
+
+load_dotenv()
 
 client = Client(
     host="api.github.com", is_enterprise=False,
     authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN"))
 )
 
-owner = 'JialinC'
-repository = 'xv6'
+owner = 'tvt15'
+repository = 'Pathfinder'
 response = client.execute(query=RepositoryContributors(),
                           substitutions={"owner": owner, "repo_name": repository})
 print(response)
