@@ -1,3 +1,12 @@
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
+
+token = os.getenv("GITHUB_TOKEN")
+# debug_mode = os.getenv("DEBUG")
+
 class Authenticator:
     """
     Handles Authentication Method for GitHub clients.
@@ -25,5 +34,5 @@ class PersonalAccessTokenAuthenticator(Authenticator):
             Authentication Header
         """
         return {
-            "Authorization": f"token {self._token}"
+            "Authorization": f"Bearer {self._token}"
         }

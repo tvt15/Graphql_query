@@ -39,8 +39,8 @@ class Client:
 
     def __init__(self,
                  protocol: str = "https",
-                 host: str = "api.github.com",
-                 is_enterprise: bool = False,
+                 host: str = "gitlab.com/api",
+                 is_enterprise: bool = False,   
                  authenticator: Authenticator = None):
         """
         Initializes the client.

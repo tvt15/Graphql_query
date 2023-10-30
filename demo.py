@@ -10,11 +10,11 @@ load_dotenv()
 
 client = Client(
     host="api.github.com", is_enterprise=False,
-    authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN"))
+    authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITLAB_PERSONAL_ACCESS_TOKEN"))
 )
 
-owner = 'tvt15'
-repository = 'Pathfinder'
+owner = 'chaaand2001'
+repository = 'query_graphQL'
 response = client.execute(query=RepositoryContributors(),
                           substitutions={"owner": owner, "repo_name": repository})
 print(response)
