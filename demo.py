@@ -17,7 +17,7 @@ client = Client(
 )
 
 owner = 'chaaand2001'
-repository = 'query_graphQL'
+repository = "oodd1/query_graphQL"
 # response = client.execute(query=RepositoryContributors(),
 #                           substitutions={"owner": owner, "repo_name": repository})
 # print(response)
@@ -30,10 +30,11 @@ repository = 'query_graphQL'
 #                                substitutions={"owner": owner, "repo_name": repository, "pg_size": 100}):
 #     print(response)
 
-# response = client.execute(query = ProjectQuery(),
-#                           )
-# print(response)
+response = client.execute(query = ProjectQuery(),
+                          substitutions={"owner": owner, "repo_name": repository})
+print(response)
 
 response = client.execute(query = ProjectContributorsQuery(),
                           substitutions={"owner": owner, "repo_name": repository})
 print(response)
+

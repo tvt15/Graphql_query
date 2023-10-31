@@ -131,6 +131,9 @@ class Client:
         rate_query = QueryCost(match.group('content'))
         rate_limit = self._retry_request(3, 10, rate_query, {"dryrun": True})
         print(rate_limit)
+        rate_limit_data = rate_limit.json()
+        print(rate_limit_data)
+
         # rate_limit = rate_limit.json()["data"]["rateLimit"]
         # cost = rate_limit['cost']
         # remaining = rate_limit['remaining']
