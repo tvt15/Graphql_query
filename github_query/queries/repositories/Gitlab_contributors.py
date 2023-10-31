@@ -13,7 +13,6 @@ class ProjectContributorsQuery(Query):
                                         QueryNode("commits",fields=[
                                                 QueryNode("nodes",fields=[
                                                         QueryNode("author",fields=[
-                                                                "email",
                                                                 "name",
                                                                 "id",
                                                             ])

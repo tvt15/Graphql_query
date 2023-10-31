@@ -1,10 +1,10 @@
 # Python Version
-We provide a convenient tool to query a user's GitHub metrics.
+We provide a convenient tool to query a user's GitLab metrics.
 
 **IN ORDER TO USE THIS TOOL, YOU NEED TO PROVIDE YOUR OWN .env FILE.**
 Because we use the [dotenv](https://pypi.org/project/python-dotenv/) package to load environment variable.
-**YOU ALSO NEED TO PROVIDE YOUR GITHUB PERSONAL ACCESS TOKEN(PAT) IN YOUR .env FILE**
-i.e. GITHUB_TOKEN  = 'your_access_token'
+**YOU ALSO NEED TO PROVIDE YOUR GITLAB PERSONAL ACCESS TOKEN(PAT) IN YOUR .env FILE**
+i.e. GITLAB_PERSONAL_ACCESS_TOKEN  = 'your_personal_access_token'
 
 ## Installation
 
@@ -36,9 +36,9 @@ TBD
 ### authentication  — Basic authenticator class
 Source code: [github_graphql/authentication.py]()
 
-This module provides the basic authentication mechanism. User needs to provide a valid GitHub PAT with correct scope to run queries. 
+This module provides the basic authentication mechanism. User needs to provide a valid GitLab PAT with correct scope to run queries. 
 A PersonalAccessTokenAuthenticator object will be created with the PAT that user provided. get_authorization_header method will return an
- authentication header that will be used when send request to GitHub GraphQL server.
+ authentication header that will be used when send request to GitLab GraphQL server.
 
 <span style="font-size: larger;">Authenticator Objects</span>
 
@@ -46,15 +46,15 @@ Parent class of PersonalAccessTokenAuthenticator. Serve as base class of any aut
 
 <span style="font-size: larger;">PersonalAccessTokenAuthenticator Objects</span>
 
-Handles personal access token authentication method for GitHub clients.
+Handles personal access token authentication method for GitLab clients.
 
 `class PersonalAccessTokenAuthenticator(token)`
-* The `token` argument is required. This is the user's GitHub personal access token with the necessary scope to execute the queries that the user required.
+* The `token` argument is required. This is the user's GitLab personal access token with the necessary scope to execute the queries that the user required.
 
 Instance methods:
 
 `get_authorization_header()`
-* Returns the authentication header as a dictionary i.e. {"Authorization": "your_access_token"}.
+* Returns the authentication header as a dictionary i.e. {"Authorization": "your_personal_access_token"}.
 
 ### query  — Classes for building GraphQL queries
 Source code: [github_graphql/query.py]()
@@ -64,8 +64,8 @@ QueryNode represents a basic building block of a GraphQL query.
 QueryNodePaginator is a specialized QueryNode for paginated requests. 
 Query represents a terminal query node that can be executed. 
 PaginatedQuery represents a terminal query node designed for paginated requests.
-* You can find more information about GitHub GraphQL API here: [GitHub GraphQL API documentation](https://docs.github.com/en/graphql)
-* You can use GitHub GraphQL Explorer to try out queries: [GitHub GraphQL API Explorer](https://docs.github.com/en/graphql/overview/explorer)
+* You can find more information about GitLab GraphQL API here: [GitLab GraphQL API documentation](https://docs.gitlab.com/ee/api/graphql/)
+* You can use GitLab GraphQL Explorer to try out queries: [GitLab GraphQL API Explorer](https://gitlab.com/-/graphql-explorer)
 
 <span style="font-size: larger;">QueryNode Objects</span>
 
@@ -165,18 +165,18 @@ Instance methods:
 ### client  — 
 Source code: [github_graphql/client.py]()
 
-This class represents the main GitHub GraphQL client.
+This class represents the main GitLab GraphQL client.
 
 `class Client(protocol, host, is_enterprise, authenticator)`
 *`protocol`: Protocol used for server communication.
 *`host`: Host server domain or IP.
-*`is_enterprise`: Boolean to check if the host is running on GitHub Enterprise.
+*`is_enterprise`: Boolean to check if the host is running on GitLab Enterprise.
 *`authenticator`: The authentication handler for the client.
 
 Private methods:
 
 `_base_path(self)`:
-* Returns the base path for a GraphQL request based on whether the client is connected to GitHub Enterprise.
+* Returns the base path for a GraphQL request based on whether the client is connected to GitLab Enterprise.
 
 `_generate_headers(self, **kwargs)`:
 * Generates headers for an HTTP request, including authentication headers and other additional headers passed as keyword arguments.
@@ -199,7 +199,7 @@ Instance methods:
 
 
 ### repository_contributors — Query for retrieving contributors of a repository
-Source code: [queries/repository_contributors.py]()
+Source code: [queries/repositories/Gitlab_contributors.py]()
 
 This  GraphQL query aims to retrieve the default branch reference of a specified repository. 
 Specifically, it extracts the login names of authors from the commit history of the default branch.
@@ -220,7 +220,6 @@ query Project {
                                 commits {
                                         nodes {
                                                 author {
-                                                        email
                                                         name
                                                         id
                                                 }
@@ -258,7 +257,6 @@ query Project {
                                                         QueryNode(
                                                             "author",
                                                             fields=[
-                                                                "email",
                                                                 "name",
                                                                 "id",
                                                             ]
@@ -281,7 +279,7 @@ query Project {
 </table>
 
 ### repository_contributors_contribution — Query for retrieving contributions of a contributor made to a repository
-Source code: [queries/repository_contributors_contribution.py](https://github.com/JialinC/GitHub_GraphQL/blob/main/python_github_query/queries/repository_contributors_contribution.py)
+Source code: [queries/repositories/Gitlab_contributors_contribution.py]()
 
 This GraphQL query is designed to retrieve the commit history of a specified author ($id) 
 in the default branch of a specified repository ($owner and $name). 
@@ -297,24 +295,30 @@ additions, and deletions for each commit, along with the author's login name.
 <td>
 
 ```
-##Not the correct one
-<!-- query Project {
-        project(fullPath: "oodd1/query_graphQL") {
-                createdAt
-                mergeRequests {
-                        count
-                        nodes {
-                                diffStatsSummary {
-                                        additions
-                                        deletions
-                                        fileCount
-                                }
-                                commitCount
-                        }
+query ($owner: String!, $name: String!, $id: ID!){
+  repository(owner: $owner, name: $name) {
+    defaultBranchRef {
+      target {
+        ... on Commit {
+          history(author: { id: $id }) {
+            totalCount
+            nodes {
+              authoredDate
+              changedFilesIfAvailable
+              additions
+              deletions
+              author {
+                user {
+                  login
                 }
+              }
+            }
+          }
         }
-} -->
-
+      }
+    }
+  }
+}
 ```
 
 </td>
@@ -359,7 +363,7 @@ additions, and deletions for each commit, along with the author's login name.
 </table>
 
 ### repositories — Query for retrieving commits af a contributor made to a repository
-Source code: [queries/repository_commits.py]()
+Source code: [queries/repositories/Gitlab_commits.py]()
 
 This GraphQL query is structured to retrieve commits from the default branch of a specified repository. For each commit, it fetches the authored date, the number of changed files (if available), the number of additions and deletions, the commit message, and details about the commit's author.
 
