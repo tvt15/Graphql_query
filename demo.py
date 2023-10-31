@@ -32,11 +32,11 @@ print (repository)
 #                                substitutions={"owner": owner, "repo_name": repository, "pg_size": 100}):
 #     print(response)
 
-# response = client.execute(query = ProjectQuery(),
-#                           substitutions={"repo_name": repository})
-# print(response)
-
-response = client.execute(query = ProjectContributorsQuery(),
+response = client.execute(query = ProjectQuery(),
                           substitutions={"repo_name": repository})
 print(response)
+
+# response = client.execute(query = ProjectContributorsQuery(),
+#                           substitutions={"repo_name": repository})
+# print(response)
 
