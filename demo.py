@@ -17,7 +17,6 @@ client = Client(
     authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITLAB_PERSONAL_ACCESS_TOKEN"))
 )
 
-owner = 'chaaand2001'
 repository = "oodd1/query_graphQL"
 print (repository)
 # response = client.execute(query=RepositoryContributors(),
