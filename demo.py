@@ -6,6 +6,7 @@ from github_query.queries.repositories.repository_contributors_contribution impo
 from github_query.queries.repositories.repository_commits import RepositoryCommits
 from github_query.queries.repositories.Gitlab_commits import ProjectQuery
 from github_query.queries.repositories.Gitlab_contributors import ProjectContributorsQuery
+import urllib
 
 from dotenv import load_dotenv
 
@@ -18,6 +19,7 @@ client = Client(
 
 owner = 'chaaand2001'
 repository = "oodd1/query_graphQL"
+print (repository)
 # response = client.execute(query=RepositoryContributors(),
 #                           substitutions={"owner": owner, "repo_name": repository})
 # print(response)
@@ -31,10 +33,10 @@ repository = "oodd1/query_graphQL"
 #     print(response)
 
 response = client.execute(query = ProjectQuery(),
-                          substitutions={"owner": owner, "repo_name": repository})
+                          substitutions={"repo_name": repository})
 print(response)
 
 response = client.execute(query = ProjectContributorsQuery(),
-                          substitutions={"owner": owner, "repo_name": repository})
+                          substitutions={"repo_name": repository})
 print(response)
 
