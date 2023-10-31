@@ -213,24 +213,22 @@ Specifically, it extracts the login names of authors from the commit history of 
 <td>
 
 ```
-query ($owner: String!, $name: String!) {
-  repository(owner: $owner, name: $name) {
-    defaultBranchRef {
-      target {
-        ... on Commit {
-          history{
-            nodes {
-              author {
-                user {
-                  login
+query Project {
+        project(fullPath: "oodd1/query_graphQL") {
+                mergeRequests {
+                        nodes {
+                                commits {
+                                        nodes {
+                                                author {
+                                                        email
+                                                        name
+                                                        id
+                                                }
+                                        }
+                                }
+                        }
                 }
-              }
-            }
-          }
         }
-      }
-    }
-  }
 }
 ```
 
@@ -238,54 +236,45 @@ query ($owner: String!, $name: String!) {
 <td>
 
 ```python
-def __init__(self):
-    super().__init__(
-        fields=[
-            QueryNode(
-                "repository",
-                args={"owner": "$owner",
-                      "name": "$repo_name"},
-                fields=[
-                    QueryNode(
-                        "defaultBranchRef",
-                        fields=[
-                            QueryNode(
-                                "target",
-                                fields=[
-                                    QueryNode(
-                                        "... on Commit",
-                                        fields=[
-                                            QueryNode(
-                                                "history",
-                                                fields=[
-                                                    QueryNode(
-                                                        "nodes",
-                                                        fields=[
-                                                            QueryNode(
-                                                                "author",
-                                                                fields=[
-                                                                    QueryNode(
-                                                                        "user",
-                                                                        fields=[
-                                                                            "login"
-                                                                        ]
-                                                                    )
-                                                                ]
-                                                            )
-                                                        ]
-                                                    )
-                                                ]
-                                            )
-                                        ]
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
-            )
-        ]
-    )
+    def __init__(self):
+        super().__init__(
+            fields=[
+                QueryNode(
+                    "project",
+                    args={"fullPath": "oodd1/query_graphQL"},
+                    fields=[
+                        QueryNode(
+                            "mergeRequests",
+                            fields=[
+                                QueryNode(
+                                    "nodes",
+                                    fields=[
+                                        QueryNode(
+                                            "commits",
+                                            fields=[
+                                                QueryNode(
+                                                    "nodes",
+                                                    fields=[
+                                                        QueryNode(
+                                                            "author",
+                                                            fields=[
+                                                                "email",
+                                                                "name",
+                                                                "id",
+                                                            ]
+                                                        )
+                                                    ]
+                                                )
+                                            ]
+                                        )
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+                )
+            ]
+        )
 ```
 </td>
 </tr>
@@ -308,90 +297,62 @@ additions, and deletions for each commit, along with the author's login name.
 <td>
 
 ```
-query ($owner: String!, $name: String!, $id: ID!){
-  repository(owner: $owner, name: $name) {
-    defaultBranchRef {
-      target {
-        ... on Commit {
-          history(author: { id: $id }) {
-            totalCount
-            nodes {
-              authoredDate
-              changedFilesIfAvailable
-              additions
-              deletions
-              author {
-                user {
-                  login
+##Not the correct one
+<!-- query Project {
+        project(fullPath: "oodd1/query_graphQL") {
+                createdAt
+                mergeRequests {
+                        count
+                        nodes {
+                                diffStatsSummary {
+                                        additions
+                                        deletions
+                                        fileCount
+                                }
+                                commitCount
+                        }
                 }
-              }
-            }
-          }
         }
-      }
-    }
-  }
-}
+} -->
+
 ```
 
 </td>
 <td>
 
 ```python
-    def __init__(self):
-        super().__init__(
-            fields=[
-                QueryNode(
-                    "repository",
-                    args={"owner": "$owner",
-                          "name": "$repo_name"},
-                    fields=[
-                        QueryNode(
-                            "defaultBranchRef",
-                            fields=[
-                                QueryNode(
-                                    "target",
-                                    fields=[
-                                        QueryNode(
-                                            "... on Commit",
-                                            fields=[
-                                                QueryNode(
-                                                    "history",
-                                                    args={"author": "$id"},
-                                                    fields=[
-                                                        "totalCount",
-                                                        QueryNode(
-                                                            "nodes",
-                                                            fields=[
-                                                                "authoredDate",
-                                                                "changedFilesIfAvailable",
-                                                                "additions",
-                                                                "deletions",
-                                                                QueryNode(
-                                                                    "author",
-                                                                    fields=[
-                                                                        QueryNode(
-                                                                            "user",
-                                                                            fields=[
-                                                                                "login"
-                                                                            ]
-                                                                        )
-                                                                    ]
-                                                                )
-                                                            ]
-                                                        )
-                                                    ]
-                                                )
-                                            ]
-                                        )
-                                    ]
-                                )
-                            ]
-                        )
-                    ]
-                )
-            ]
-        )
+    # def __init__(self):
+    #     super().__init__(
+    #         fields=[
+    #             QueryNode(
+    #                 "project",
+    #                 args={"fullPath": "oodd1/query_graphQL"},
+    #                 fields=[
+    #                     "createdAt",
+    #                     QueryNode(
+    #                         "mergeRequests",
+    #                         fields=[
+    #                             "count",
+    #                             QueryNode(
+    #                                 "nodes",
+    #                                 fields=[
+    #                                     QueryNode(
+    #                                         "diffStatsSummary",
+    #                                         fields=[
+    #                                             "additions",
+    #                                             "deletions",
+    #                                             "fileCount",
+    #                                         ],
+    #                                     ),
+    #                                     "commitCount",
+    #                                 ],
+    #                             ),
+    #                         ],
+    #                     ),
+    #                 ],
+    #             ),
+    #         ]
+    #     )
 ```
 </td>
 </tr>
@@ -411,39 +372,32 @@ This GraphQL query is structured to retrieve commits from the default branch of 
 <td>
 
 ```
-query ($owner: String!, $repo_name: String!, $pg_size: Int!) {
-  repository(owner: $owner, name: $repo_name) {
-    defaultBranchRef {
-      target {
-        ... on Commit {
-          history(first: $pg_size) {
-            totalCount
+query Project {
+    project(fullPath: "oodd1/query_graphQL") {
+        createdAt
+        mergeRequests {
+            count
             nodes {
-              authoredDate
-              changedFilesIfAvailable
-              additions
-              deletions
-              message
-              parents (first: 2) {
-                totalCount
-              }
-              author {
-                name
-                email
-                user {
-                  login
+                diffStatsSummary{
+                    additions
+                    deletions
+                    fileCount
                 }
-              }
+                commitCount
+                commits {
+                    nodes {
+                        committedDate
+                        message
+                        author {
+                            email
+                            name
+                            id
+                        }
+                    }
+                }
             }
-            pageInfo {
-              endCursor
-              hasNextPage
-            }
-          }
         }
-      }
     }
-  }
 }
 ```
 
@@ -451,71 +405,56 @@ query ($owner: String!, $repo_name: String!, $pg_size: Int!) {
 <td>
 
 ```python
-    def __init__(self):
+        def __init__(self):
         super().__init__(
             fields=[
                 QueryNode(
-                    "repository",
-                    args={"owner": "$owner",
-                          "name": "$repo_name"},
+                    "project",
+                    args={"fullPath": "oodd1/query_graphQL"},
                     fields=[
+                        "createdAt",
                         QueryNode(
-                            "defaultBranchRef",
+                            "mergeRequests",
                             fields=[
+                                "count",
                                 QueryNode(
-                                    "target",
+                                    "nodes",
                                     fields=[
                                         QueryNode(
-                                            "... on Commit",
+                                            "diffStatsSummary",
                                             fields=[
-                                                QueryNodePaginator(
-                                                    "history",
-                                                    args={"first": "$pg_size"},
+                                                "additions",
+                                                "deletions",
+                                                "fileCount",
+                                            ],
+                                        ),
+                                        "commitCount",
+                                        QueryNode(
+                                            "commits",
+                                            fields=[
+                                                "nodes",
+                                                QueryNode(
+                                                    "committedDate"
+                                                ),
+                                                QueryNode(
+                                                    "message"
+                                                ),
+                                                QueryNode(
+                                                    "author",
                                                     fields=[
-                                                        'totalCount',
-                                                        QueryNode(
-                                                            "nodes",
-                                                            fields=[
-                                                                "authoredDate",
-                                                                "changedFilesIfAvailable",
-                                                                "additions",
-                                                                "deletions",
-                                                                "message",
-                                                                QueryNode(
-                                                                    "parents (first: 2)",
-                                                                    fields=[
-                                                                        "totalCount"
-                                                                    ]
-                                                                ),
-                                                                QueryNode(
-                                                                    "author",
-                                                                    fields=[
-                                                                        'name',
-                                                                        'email',
-                                                                        QueryNode(
-                                                                            "user",
-                                                                            fields=[
-                                                                                "login"
-                                                                            ]
-                                                                        )
-                                                                    ]
-                                                                )
-                                                            ]
-                                                        ),
-                                                        QueryNode(
-                                                            "pageInfo",
-                                                            fields=["endCursor", "hasNextPage"]
-                                                        )
+                                                        "email",
+                                                        "name",
+                                                        "id"
                                                     ]
-                                                )
-                                            ]
-                                        )
-                                    ]
-                                )
-                            ]
-                        )
-                    ]
-                )
+                                                ),
+                                            ],
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
             ]
         )
 ```

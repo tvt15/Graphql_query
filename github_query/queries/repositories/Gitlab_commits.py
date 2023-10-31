@@ -26,6 +26,26 @@ class ProjectQuery(PaginatedQuery):
                                             ],
                                         ),
                                         "commitCount",
+                                        QueryNode(
+                                            "commits",
+                                            fields=[
+                                                "nodes",
+                                                QueryNode(
+                                                    "committedDate"
+                                                ),
+                                                QueryNode(
+                                                    "message"
+                                                ),
+                                                QueryNode(
+                                                    "author",
+                                                    fields=[
+                                                        "email",
+                                                        "name",
+                                                        "id"
+                                                    ]
+                                                ),
+                                            ],
+                                        ),
                                     ],
                                 ),
                             ],
