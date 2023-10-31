@@ -6,40 +6,23 @@ class ProjectContributorsQuery(Query):
             fields=[
                 QueryNode(
                     "project",
-                    args={"fullPath": "oodd1/query_graphQL"},
+                    args={"fullPath": "$repo_name"},
                     fields=[
-                        QueryNode(
-                            "mergeRequests",
-                            fields=[
-                                QueryNode(
-                                    "nodes",
-                                    fields=[
-                                        QueryNode(
-                                            "commits",
-                                            fields=[
-                                                QueryNode(
-                                                    "nodes",
-                                                    fields=[
-                                                        QueryNode(
-                                                            "author",
-                                                            fields=[
+                        QueryNode("mergeRequests",fields=[
+                                QueryNode("nodes",fields=[
+                                        QueryNode("commits",fields=[
+                                                QueryNode("nodes",fields=[
+                                                        QueryNode("author",fields=[
                                                                 "email",
                                                                 "name",
                                                                 "id",
-                                                            ]
-                                                        )
-                                                    ]
-                                                )
-                                            ]
-                                        )
-                                    ]
-                                )
-                            ]
-                        )
-                    ]
-                )
-            ]
-        )
+                                                            ])
+                                                    ])
+                                            ])
+                                    ])
+                            ])
+                    ])
+            ])
 
 @staticmethod
 def extract_unique_authors(raw_data: dict):

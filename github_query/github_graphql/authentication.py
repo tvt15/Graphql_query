@@ -1,11 +1,4 @@
-from dotenv import load_dotenv
-import os
 
-
-load_dotenv()
-
-token = os.getenv("GITHUB_TOKEN")
-# debug_mode = os.getenv("DEBUG")
 
 class Authenticator:
     """

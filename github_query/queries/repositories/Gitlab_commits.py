@@ -1,13 +1,13 @@
-from github_query.github_graphql.query import QueryNode, PaginatedQuery, QueryNodePaginator
+from github_query.github_graphql.query import QueryNode, PaginatedQuery, QueryNodePaginator,Query
 
 
-class ProjectQuery(PaginatedQuery):
+class ProjectQuery(Query):
     def __init__(self):
         super().__init__(
             fields=[
                 QueryNode(
                     "project",
-                    args={"fullPath": "oodd1/query_graphQL"},
+                    args={"fullPath": "$repo_name"},
                     fields=[
                         "createdAt",
                         QueryNode(
