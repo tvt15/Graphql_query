@@ -26,26 +26,34 @@ class ProjectQuery(Query):
                                             ],
                                         ),
                                         "commitCount",
-                                        # QueryNode(
-                                        #     "commits",
-                                        #     fields=[
-                                        #         "nodes",
-                                        #         QueryNode(
-                                        #             "committedDate"
-                                        #         ),
-                                        #         QueryNode(
-                                        #             "message"
-                                        #         ),
-                                        #         QueryNode(
-                                        #             "author",
-                                        #             fields=[
-                                        #                 "email",
-                                        #                 "name",
-                                        #                 "id"
-                                        #             ]
-                                        #         ),
-                                        #     ],
-                                        # ),
+                                        QueryNode(
+                                            "commits",
+                                            fields=[
+                                                QueryNode(
+                                                    "nodes",
+                                                    fields=[
+                                                        "commitedDate",
+                                                        "message",
+                                                        QueryNode(
+                                                            "author",
+                                                            fields=[
+                                                                "email",
+                                                                "name",
+                                                                "username",
+                                                                "id",
+                                                            ],
+                                                        ),
+                                                    ],
+                                                ),
+                                            ],
+                                        ),
+                                    ],
+                                ),
+                                QueryNode(
+                                    "pageInfo",
+                                    fields=[
+                                        "endCursor",
+                                        "hasNextPage",
                                     ],
                                 ),
                             ],
