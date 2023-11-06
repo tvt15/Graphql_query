@@ -32,17 +32,8 @@ class ProjectQuery(Query):
                                                 QueryNode(
                                                     "nodes",
                                                     fields=[
-                                                        # "commitedDate",
-                                                        # "message",
-                                                        QueryNode(
-                                                            "author",
-                                                            fields=[
-                                                                "email",
-                                                                "name",
-                                                                "username",
-                                                                "id",
-                                                            ],
-                                                        ),
+                                                        "committedDate",
+                                                        "message",
                                                     ],
                                                 ),
                                             ],
