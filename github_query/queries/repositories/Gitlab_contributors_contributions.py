@@ -6,11 +6,11 @@ class ProjectContributorsContribution(Query):
         super().__init__(
             fields=[
                 QueryNode(
-                    "project",
-                    args={"fullPath": "$repo_name"},
+                    "currentUser",
                     fields=[
                         QueryNode(
-                            "mergeRequest",
+                            "authoredMergeRequests",
+                            args={"projectPath": "$repo_name"},
                             fields=[
                                 "count",
                                 QueryNode(
@@ -19,8 +19,8 @@ class ProjectContributorsContribution(Query):
                                         QueryNode(
                                             "diffStatsSummary",
                                             fields=[
-                                                "addition",
-                                                "deletion",
+                                                "additions",
+                                                "deletions",
                                                 "fileCount",
                                             ],
                                         ),
@@ -30,13 +30,8 @@ class ProjectContributorsContribution(Query):
                                                 QueryNode(
                                                     "nodes",
                                                     fields=[
-                                                        "commitedDate",
-                                                        QueryNode(
-                                                            "author",
-                                                            fields=[
-                                                                "name",
-                                                            ],
-                                                        ),
+                                                        "committedDate",
+                                                        "message",
                                                     ],
                                                 ),
                                             ],
@@ -45,9 +40,10 @@ class ProjectContributorsContribution(Query):
                                 ),
                             ],
                         ),
+                        "id",
                     ],
                 ),
-            ]
+            ],
         )
 
 @staticmethod
