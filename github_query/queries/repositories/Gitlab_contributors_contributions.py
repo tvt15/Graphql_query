@@ -1,7 +1,7 @@
 from typing import Dict, List, Union
 from github_query.github_graphql.query import QueryNode, PaginatedQuery, QueryNodePaginator,Query
 
-class ProjectQuery(Query):
+class ProjectContributorsContribution(Query):
     def __init__(self):
         super().__init__(
             fields=[
