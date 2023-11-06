@@ -10,8 +10,8 @@ client = Client(
     authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN"))
 )
 
-owner = 'JialinC'
-repository = 'xv6'
+owner = 'sdshao'
+repository = 'Performance-Bugs'
 response = client.execute(query=RepositoryContributors(),
                           substitutions={"owner": owner, "repo_name": repository})
 print(response)
