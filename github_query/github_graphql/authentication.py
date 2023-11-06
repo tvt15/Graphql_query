@@ -1,3 +1,5 @@
+
+
 class Authenticator:
     """
     Handles Authentication Method for GitHub clients.
@@ -25,5 +27,5 @@ class PersonalAccessTokenAuthenticator(Authenticator):
             Authentication Header
         """
         return {
-            "Authorization": f"token {self._token}"
+            "Authorization": f"Bearer {self._token}"
         }
