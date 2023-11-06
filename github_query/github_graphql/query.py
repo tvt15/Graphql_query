@@ -40,7 +40,7 @@ class QueryNode:
                 args_list.append(f'{key}: "{value}"')
             elif key == "owner":
                 args_list.append(f'{key}: "{value}"')
-            elif key == "name":
+            elif key == "fullPath":
                 args_list.append(f'{key}: "{value}"')
             elif isinstance(value, str):
                 args_list.append(f'{key}: {value}')
