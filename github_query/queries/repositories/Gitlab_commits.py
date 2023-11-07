@@ -66,20 +66,9 @@ def contributors_summary(raw_data: dict, cumulative_contributions: dict = None):
         additions = merge_request['diffStatsSummary']['additions']
         deletions = merge_request['diffStatsSummary']['deletions']
         commit_count = merge_request['commitCount']
-        # committedDate = merge_request['commits']['committedDate']
         commit_nodes = merge_request['commits']['nodes']
         commit_details = merge_request['commit_nodes']['author']
         author_name = merge_request['author']['name']
-
-
-        # for commit_nodes in commit_nodes:
-        #     committedDate = commit_nodes['nodes']
-        #     if committedDate:
-        #         committedDate = committedDate['committedDate']
-        #         author_details.add(committedDate)
-
-
-        # commitedDate = merge_request['commit_nodes']['commitedDate']
 
         if author_name not in cumulative_contributions:
             cumulative_contributions[author_name] = {
