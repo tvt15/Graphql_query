@@ -34,6 +34,14 @@ class ProjectQuery(Query):
                                                     fields=[
                                                         "committedDate",
                                                         "message",
+                                                        QueryNode(
+                                                            "author",
+                                                            fields=[
+                                                                "email",
+                                                                "name",
+                                                                "username",
+                                                            ],
+                                                        ),
                                                     ],
                                                 ),
                                             ],
@@ -66,6 +74,7 @@ def contributors_summary(raw_data: dict, cumulative_contributions: dict = None):
         additions = merge_request['diffStatsSummary']['additions']
         deletions = merge_request['diffStatsSummary']['deletions']
         commit_count = merge_request['commitCount']
+
         commit_nodes = merge_request['commits']['nodes']
         commit_details = merge_request['commit_nodes']['author']
         author_name = merge_request['author']['name']
