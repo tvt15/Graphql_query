@@ -18,6 +18,11 @@ client = Client(
     authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITLAB_PERSONAL_ACCESS_TOKEN"))
 )
 
+owner = 'sdshao'
+repository = 'Performance-Bugs'
+response = client.execute(query=RepositoryContributors(),
+                          substitutions={"owner": owner, "repo_name": repository})
+
 repository = "oodd1/query_graphQL"
 print (repository)
 # response = client.execute(query=RepositoryContributors(),
