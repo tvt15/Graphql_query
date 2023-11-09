@@ -1,17 +1,16 @@
+from typing import Dict, List, Union
 from github_query.github_graphql.query import QueryNode, PaginatedQuery, QueryNodePaginator,Query
 
-
-class ProjectQuery(Query):
+class ProjectContributorsContribution(Query):
     def __init__(self):
         super().__init__(
             fields=[
                 QueryNode(
-                    "project",
-                    args={"fullPath": "$repo_name"},
+                    "currentUser",
                     fields=[
-                        "createdAt",
                         QueryNode(
-                            "mergeRequests",
+                            "authoredMergeRequests",
+                            args={"projectPath": "$repo_name"},
                             fields=[
                                 "count",
                                 QueryNode(
@@ -25,7 +24,6 @@ class ProjectQuery(Query):
                                                 "fileCount",
                                             ],
                                         ),
-                                        "commitCount",
                                         QueryNode(
                                             "commits",
                                             fields=[
@@ -34,14 +32,6 @@ class ProjectQuery(Query):
                                                     fields=[
                                                         "committedDate",
                                                         "message",
-                                                        QueryNode(
-                                                            "author",
-                                                            fields=[
-                                                                "email",
-                                                                "name",
-                                                                "username",
-                                                            ],
-                                                        ),
                                                     ],
                                                 ),
                                             ],
@@ -50,11 +40,11 @@ class ProjectQuery(Query):
                                 ),
                             ],
                         ),
+                        "id",
                     ],
                 ),
-            ]
+            ],
         )
-
 
 @staticmethod
 def contributors_summary(raw_data: dict, cumulative_contributions: dict = None):
@@ -67,6 +57,7 @@ def contributors_summary(raw_data: dict, cumulative_contributions: dict = None):
         dict: A dictionary of contributors and their total additions, deletions, and commit counts.
     """
     merge_requests = raw_data['project']['mergeRequests']['nodes']
+
     if cumulative_contributions is None:
         cumulative_contributions = {}
 
@@ -74,9 +65,6 @@ def contributors_summary(raw_data: dict, cumulative_contributions: dict = None):
         additions = merge_request['diffStatsSummary']['additions']
         deletions = merge_request['diffStatsSummary']['deletions']
         commit_count = merge_request['commitCount']
-
-        commit_nodes = merge_request['commits']['nodes']
-        commit_details = merge_request['commit_nodes']['author']
         author_name = merge_request['author']['name']
 
         if author_name not in cumulative_contributions:
@@ -91,4 +79,3 @@ def contributors_summary(raw_data: dict, cumulative_contributions: dict = None):
             cumulative_contributions[author_name]['total_commits'] += commit_count
 
     return cumulative_contributions
-

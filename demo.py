@@ -1,6 +1,7 @@
 import os
 from github_query.github_graphql.authentication import PersonalAccessTokenAuthenticator
 from github_query.github_graphql.client import Client
+from github_query.queries.repositories.Gitlab_contributors_contributions import ProjectContributorsContribution
 from github_query.queries.repositories.repository_contributors import RepositoryContributors
 from github_query.queries.repositories.repository_contributors_contribution import RepositoryContributorsContribution
 from github_query.queries.repositories.repository_commits import RepositoryCommits
@@ -36,11 +37,19 @@ print (repository)
 #                                substitutions={"owner": owner, "repo_name": repository, "pg_size": 100}):
 #     print(response)
 
+response = client.execute(query = ProjectContributorsQuery(),
+                          substitutions={"repo_name": repository})
+print(response)
+
+response = client.execute(query = ProjectContributorsContribution(),
+                          substitutions={"repo_name": repository})
+print(response)
+
 response = client.execute(query = ProjectQuery(),
                           substitutions={"repo_name": repository})
 print(response)
 
-# response = client.execute(query = ProjectContributorsQuery(),
-#                           substitutions={"repo_name": repository})
-# print(response)
+
+
+
 
