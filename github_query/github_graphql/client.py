@@ -129,7 +129,7 @@ class Client:
         match = re.search(r'query\s*{(?P<content>.+)}', query_string)
         rate_query = QueryCost(match.group('content'))
         rate_limit = self._retry_request(3, 10, rate_query, {"dryrun": True})
-        print(rate_limit)
+        print(rate_limit.json())
         rate_limit = rate_limit.json()["data"]["rateLimit"]
         cost = rate_limit['cost']
         remaining = rate_limit['remaining']

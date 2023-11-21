@@ -44,6 +44,8 @@ class QueryNode:
                 args_list.append(f'{key}: "{value}"')
             elif key == "projectPath":
                 args_list.append(f'{key}: "{value}"')
+            elif key == "name":
+                args_list.append(f'{key}: "{value}"')
             elif isinstance(value, str):
                 args_list.append(f'{key}: {value}')
             elif isinstance(value, list):

@@ -18,13 +18,13 @@ client = Client(
     authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN"))
 )
 
-owner = 'tvt15'
-repository = 'Gitlab_query'
+owner = "tvt15"
+repository = "Pathfinder"
 response = client.execute(query=RepositoryContributors(),
                           substitutions={"owner": owner, "repo_name": repository})
 
-repository = "oodd1/query_graphQL"
-print (repository)
+# repository = "oodd1/query_graphQL"
+# print (repository)
 response = client.execute(query=RepositoryContributors(),
                           substitutions={"owner": owner, "repo_name": repository})
 print(response)
