@@ -14,40 +14,40 @@ from dotenv import load_dotenv
 load_dotenv()
 
 client = Client(
-    host="gitlab.com/api", is_enterprise=False,
-    authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITLAB_PERSONAL_ACCESS_TOKEN"))
+    host="api.github.com", is_enterprise=False,
+    authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN"))
 )
 
-owner = 'sdshao'
-repository = 'Performance-Bugs'
+owner = 'tvt15'
+repository = 'Gitlab_query'
 response = client.execute(query=RepositoryContributors(),
                           substitutions={"owner": owner, "repo_name": repository})
 
 repository = "oodd1/query_graphQL"
 print (repository)
-# response = client.execute(query=RepositoryContributors(),
-#                           substitutions={"owner": owner, "repo_name": repository})
+response = client.execute(query=RepositoryContributors(),
+                          substitutions={"owner": owner, "repo_name": repository})
+print(response)
+
+response = client.execute(query=RepositoryContributorsContribution(),
+                          substitutions={"owner": owner, "repo_name": repository, "id": { "id": "MDQ6VXNlcjM4NTQ5Njg5"}})
+print(response)
+
+for response in client.execute(query=RepositoryCommits(),
+                               substitutions={"owner": owner, "repo_name": repository, "pg_size": 100}):
+    print(response)
+
+# response = client.execute(query = ProjectContributorsQuery(),
+#                           substitutions={"repo_name": repository})
 # print(response)
 
-# response = client.execute(query=RepositoryContributorsContribution(),
-#                           substitutions={"owner": owner, "repo_name": repository, "id": { "id": "MDQ6VXNlcjM4NTQ5Njg5"}})
+# response = client.execute(query = ProjectContributorsContribution(),
+#                           substitutions={"repo_name": repository})
 # print(response)
 
-# for response in client.execute(query=RepositoryCommits(),
-#                                substitutions={"owner": owner, "repo_name": repository, "pg_size": 100}):
-#     print(response)
-
-response = client.execute(query = ProjectContributorsQuery(),
-                          substitutions={"repo_name": repository})
-print(response)
-
-response = client.execute(query = ProjectContributorsContribution(),
-                          substitutions={"repo_name": repository})
-print(response)
-
-response = client.execute(query = ProjectQuery(),
-                          substitutions={"repo_name": repository})
-print(response)
+# response = client.execute(query = ProjectQuery(),
+#                           substitutions={"repo_name": repository})
+# print(response)
 
 
 
