@@ -5,6 +5,11 @@ import os
 from github_query.github_graphql.authentication import PersonalAccessTokenAuthenticator
 from github_query.github_graphql.client import Client
 from github_query.queries.repositories.user_login import UserLogin
+from github_query.queries.repositories.repository_commits import RepositoryCommits
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -20,7 +25,14 @@ client = Client(
 @app.route('/api/github/userlogin')
 def fetch_github_data():
     response = client.execute(
-            query=UserLogin(), substitutions={"user": "torvalds"}
+            query=UserLogin(), substitutions={"user": "tvt15"}
+        )
+    return response
+
+@app.route('/api/github/repositorycommits')
+def fetch_github_commit():
+    response = client.execute(
+            query=RepositoryCommits(), substitutions={"owner": "tvt15","name": "Pathfinder"}
         )
     return response
 

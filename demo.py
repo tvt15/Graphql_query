@@ -29,9 +29,13 @@ response = client.execute(query=RepositoryContributors(),
                           substitutions={"owner": owner, "repo_name": repository})
 print(response)
 
+print("\n")
+
 response = client.execute(query=RepositoryContributorsContribution(),
-                          substitutions={"owner": owner, "repo_name": repository, "id": { "id": "MDQ6VXNlcjM4NTQ5Njg5"}})
+                          substitutions={"owner": owner, "repo_name": repository, "id": { "id": "MDQ6VXNlcjczOTk0NDY2"}})
 print(response)
+
+print("\n")
 
 for response in client.execute(query=RepositoryCommits(),
                                substitutions={"owner": owner, "repo_name": repository, "pg_size": 100}):
