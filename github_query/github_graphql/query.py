@@ -128,7 +128,7 @@ class Query(QueryNode):
                 result[key] = '"' + value + '"'
             else:
                 result[key] = value
-        result["repo_name"] = "Pathfinder"
+        result["repo_name"] = "Pathfinder" #hardcoded for repository contributors contribution
         return result
 
     def substitute(self, **kwargs):
