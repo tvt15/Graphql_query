@@ -11,6 +11,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 app = Flask(__name__)
 
 # Allow all origins to access routes with '/api/' prefix
@@ -25,14 +29,14 @@ client = Client(
 @app.route('/api/github/userlogin')
 def fetch_github_data():
     response = client.execute(
-            query=UserLogin(), substitutions={"user": "tvt15"}
+            query=UserLogin(), substitutions={"user": "tripurashree"}
         )
     return response
 
 @app.route('/api/github/repositorycommits')
 def fetch_github_commit():
     response = client.execute(
-            query=RepositoryCommits(), substitutions={"owner": "tvt15","name": "Pathfinder"}
+            query=RepositoryCommits(), substitutions={"owner": "tripurashree","name": "Pathfinder"}
         )
     return response
 
