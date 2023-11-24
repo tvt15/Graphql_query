@@ -6,10 +6,7 @@ from github_query.github_graphql.authentication import PersonalAccessTokenAuthen
 from github_query.github_graphql.client import Client
 from github_query.queries.repositories.user_login import UserLogin
 from github_query.queries.repositories.repository_commits import RepositoryCommits
-
-from dotenv import load_dotenv
-
-load_dotenv()
+from github_query.queries.repositories.repository_contributors_contribution import RepositoryContributorsContribution
 
 from dotenv import load_dotenv
 
@@ -29,16 +26,23 @@ client = Client(
 @app.route('/api/github/userlogin')
 def fetch_github_data():
     response = client.execute(
-            query=UserLogin(), substitutions={"user": "tripurashree"}
+            query=UserLogin(), substitutions={"user": "tvt15"}
         )
     return response
 
 @app.route('/api/github/repositorycommits')
 def fetch_github_commit():
-    response = client.execute(
-            query=RepositoryCommits(), substitutions={"owner": "tripurashree","name": "Pathfinder"}
+        response = client.execute(
+            query=RepositoryCommits(), substitutions={"owner": "tvt15","name": "Pathfinder"}
         )
-    return response
+        return response
+
+@app.route('/api/github/repositorycontributorscontribution')
+def fetch_github_contribution():
+        response = client.execute(
+            query=RepositoryContributorsContribution(), substitutions={"owner": "tvt15","name": "Pathfinder", "id": { "id": "MDQ6VXNlcjczOTk0NDY2"}}
+        )
+        return response
 
 # Run the app on 0.0.0.0
 if __name__ == '__main__':

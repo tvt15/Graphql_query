@@ -46,6 +46,8 @@ class QueryNode:
                 args_list.append(f'{key}: "{value}"')
             elif key == "name":
                 args_list.append(f'{key}: "{value}"')
+            elif key == "repo_name":
+                args_list.append(f'{key}: "{value}"')
             elif isinstance(value, str):
                 args_list.append(f'{key}: {value}')
             elif isinstance(value, list):
@@ -126,6 +128,7 @@ class Query(QueryNode):
                 result[key] = '"' + value + '"'
             else:
                 result[key] = value
+        result["repo_name"] = "Pathfinder"
         return result
 
     def substitute(self, **kwargs):
