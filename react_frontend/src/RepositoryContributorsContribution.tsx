@@ -36,7 +36,7 @@ const RepositoryContributorsContribution: React.FC= () => {
 
     fetchData();
   },[]);
-
+  
   return (
     <div>
       {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (

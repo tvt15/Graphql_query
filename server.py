@@ -5,8 +5,9 @@ import os
 from github_query.github_graphql.authentication import PersonalAccessTokenAuthenticator
 from github_query.github_graphql.client import Client
 from github_query.queries.repositories.user_login import UserLogin
+from github_query.queries.repositories.repository_commits import RepositoryCommits
 from github_query.queries.repositories.repository_contributors_contribution import RepositoryContributorsContribution
-# from github_query.queries.repositories.repository_contributors import RepositoryContributors
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -33,7 +34,7 @@ def fetch_github_data():
 def fetch_github_commit():
     response = client.execute(
             query=RepositoryContributorsContribution(), substitutions={"owner": "tripurashree", "repo_name":"slash", "id": { "id": "MDQ6VXNlcjcwMDg3NTU1"}}
-        )
+    )
     return response
 
 # Run the app on 0.0.0.0
