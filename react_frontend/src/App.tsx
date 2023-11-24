@@ -2,6 +2,7 @@ import React from "react";
 import UserLogin from "./UserLogin";
 import RepositoryCommits from "./RepositoryCommits";
 import RepositoryContributorsContribution from "./RepositoryContributorsContribution"
+import RepositoryContributors from "./RepositoryContributors";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <UserLogin />
       {/* <RepositoryCommits /> */}
       <RepositoryContributorsContribution />
+      <RepositoryContributors owner="tvt15" repoName="Pathfinder"/>
     </div>
   );
 };
