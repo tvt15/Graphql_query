@@ -130,20 +130,20 @@ class Client:
         rate_query = QueryCost(match.group('content'))
         rate_limit = self._retry_request(3, 10, rate_query, {"dryrun": True})
         # print(rate_limit.json)
-        rate_limit = rate_limit.json()["data"]["rateLimit"] 
-        cost = rate_limit['cost']
-        remaining = rate_limit['remaining']
-        reset_at = rate_limit['resetAt']
-        if cost > remaining - 5:
-            current_time = datetime.utcnow()
-            time_format = '%Y-%m-%dT%H:%M:%SZ'
-            reset_at = datetime.strptime(reset_at, time_format)
-            time_diff = reset_at - current_time
-            seconds = time_diff.total_seconds()
-            print(f"stop at {current_time}s.")
-            print(f"waiting for {seconds}s.")
-            print(f"reset at {reset_at}s.")
-            time.sleep(seconds + 5)
+        # rate_limit = rate_limit.json()["data"]["rateLimit"] 
+        # cost = rate_limit['cost']
+        # remaining = rate_limit['remaining']
+        # reset_at = rate_limit['resetAt']
+        # if cost > remaining - 5:
+        #     current_time = datetime.utcnow()
+        #     time_format = '%Y-%m-%dT%H:%M:%SZ'
+        #     reset_at = datetime.strptime(reset_at, time_format)
+        #     time_diff = reset_at - current_time
+        #     seconds = time_diff.total_seconds()
+        #     print(f"stop at {current_time}s.")
+        #     print(f"waiting for {seconds}s.")
+        #     print(f"reset at {reset_at}s.")
+        #     time.sleep(seconds + 5)
 
         response = self._retry_request(3, 10, query, substitutions)
 

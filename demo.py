@@ -18,8 +18,8 @@ client = Client(
     authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN"))
 )
 
-owner = "tvt15"
-repository = "Pathfinder"
+owner = "tripurashree"
+repository = "slash"
 response = client.execute(query=RepositoryContributors(),
                           substitutions={"owner": owner, "repo_name": repository})
 
@@ -32,7 +32,7 @@ print(response)
 print("\n")
 
 response = client.execute(query=RepositoryContributorsContribution(),
-                          substitutions={"owner": owner, "repo_name": repository, "id": { "id": "MDQ6VXNlcjczOTk0NDY2"}})
+                          substitutions={"owner": owner, "repo_name": repository, "id": { "id": "MDQ6VXNlcjcwMDg3NTU1"}})
 print(response)
 
 print("\n")
