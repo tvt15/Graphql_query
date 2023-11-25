@@ -26,14 +26,14 @@ client = Client(
 @app.route('/api/github/userlogin')
 def fetch_github_data():
     response = client.execute(
-            query=UserLogin(), substitutions={"user": "tripurashree"}
+            query=UserLogin(), substitutions={"user": "Chaaand03"}
         )
     return response
 
 @app.route("/api/github/repositorycontributorscontribution")
 def fetch_github_commit():
     response = client.execute(
-            query=RepositoryContributorsContribution(), substitutions={"owner": "tripurashree", "repo_name":"slash", "id": { "id": "MDQ6VXNlcjcwMDg3NTU1"}}
+            query=RepositoryContributorsContribution(), substitutions={"owner": "Chaaand03", "repo_name":"Charge-my-EV", "id": { "id": "MDQ6VXNlcjg4OTYxNTY5"}}
     )
     return response
 
