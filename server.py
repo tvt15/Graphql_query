@@ -7,6 +7,7 @@ from github_query.github_graphql.client import Client
 from github_query.queries.repositories.user_login import UserLogin
 from github_query.queries.repositories.repository_commits import RepositoryCommits
 from github_query.queries.repositories.repository_contributors_contribution import RepositoryContributorsContribution
+from github_query.queries.repositories.repository_contributors import RepositoryContributors
 
 from dotenv import load_dotenv
 
@@ -34,6 +35,13 @@ def fetch_github_data():
 def fetch_github_commit():
     response = client.execute(
             query=RepositoryContributorsContribution(), substitutions={"owner": "Chaaand03", "repo_name":"Charge-my-EV", "id": { "id": "MDQ6VXNlcjg4OTYxNTY5"}}
+    )
+    return response
+
+@app.route("/api/github/repositorycontributors")
+def fetch_github_contributors():
+    response = client.execute(
+            query=RepositoryContributors(), substitutions={"owner": "tvt15", "repo_name":"Pathfinder"}
     )
     return response
 
