@@ -31,6 +31,12 @@ def fetch_github_data():
         )
     return response
 
+@app.route('/api/github/repositorycommits')
+def fetch_github_commits():
+    for response in client.execute(query=RepositoryCommits(),
+                               substitutions={"owner": "tripurashree", "repo_name": "slash" , "pg_size": 100}):
+        return response
+
 @app.route("/api/github/repositorycontributorscontribution")
 def fetch_github_commit():
     response = client.execute(

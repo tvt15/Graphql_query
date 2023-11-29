@@ -281,7 +281,7 @@ const RepositoryContributorsContribution: React.FC= () => {
               <Line data={chartData} options={chartOptions as any} />
           </div> */}
           {/* <canvas id="myChart" /> */}
-          <Bar data={chartData} options={chartOptions as any} />
+          {/* <Bar data={chartData} options={chartOptions as any} /> */}
         </div>
       )}
   </div>

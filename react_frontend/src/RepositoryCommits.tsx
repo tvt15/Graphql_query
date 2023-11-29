@@ -1,6 +1,6 @@
 // import React, { useState, useEffect } from "react";
 
-// interface Commit {
+// interface Commit { 
 //     authoredDate: string;
 //     changedFilesIfAvailable: number;
 //     additions: number;
