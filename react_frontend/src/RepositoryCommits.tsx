@@ -101,6 +101,7 @@
 
 // inserted for trial
 import React, { useState, useEffect } from "react";
+import { Line } from "react-chartjs-2";
 
 interface Commit {
   authoredDate: string;
@@ -146,22 +147,50 @@ const RepositoryCommits: React.FC = () => {
     fetchData();
   }, []);
 
+   // Prepare data for Chart.js
+   const chartData = {
+    labels: data?.repository.defaultBranchRef.target.history.nodes.map((commit) => commit.authoredDate) || [],
+    datasets: [
+      {
+        label: "Additions",
+        data: data?.repository.defaultBranchRef.target.history.nodes.map((commit) => commit.additions) || [],
+        borderColor: "green",
+        fill: false,
+      },
+      {
+        label: "Deletions",
+        data: data?.repository.defaultBranchRef.target.history.nodes.map((commit) => commit.deletions) || [],
+        borderColor: "red",
+        fill: false,
+      },
+    ],
+  };
+
+  // Chart.js options
+  const options = {
+    scales: {
+      x: {
+        type: "linear",
+        position: "bottom",
+      },
+      y: {
+        min: 0,
+      },
+    },
+  };
+
   return (
     <div>
       {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
         <div>
           <p>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</p>
           <ul>
-            {data.repository.defaultBranchRef.target.history.nodes.map((commit, index) => (
-              <li key={index}>
-                <p>Authored Date: {commit.authoredDate}</p>
-                <p>Changed Files: {commit.changedFilesIfAvailable}</p>
-                <p>Additions: {commit.additions}</p>
-                <p>Deletions: {commit.deletions}</p>
-                <p>Message: {commit.message}</p>
-              </li>
-            ))}
+            {/* Render commit details */}
           </ul>
+
+          {/* Chart.js Line Chart */}
+          <Line data={chartData} />
+
           {data.repository.defaultBranchRef.target.history.pageInfo.hasNextPage && (
             <button>Load More</button>
           )}
@@ -172,5 +201,3 @@ const RepositoryCommits: React.FC = () => {
 };
 
 export default RepositoryCommits;
-
-
