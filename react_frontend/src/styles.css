@@ -36,3 +36,39 @@
   .chart-container {
     margin-top: 20px;
   }
+
+.form-cointainer{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 25%;
+}  
+
+.submit{
+  text-align: center;
+}
+
+.heading{
+  text-align: center;
+  justify-content: center;
+  padding-bottom: 150px;
+  color: rgb(31, 64, 53);
+}
+
+.userlogin-card{
+  padding-top: 5em;
+}
+.card-header{
+  padding-bottom: 3em;
+  text-align: center;
+  flex: auto;
+}
+
+.table{
+  width: 40%;
+  text-align: center;
+  justify-content: center;
+  margin-left: 25em;
+}
