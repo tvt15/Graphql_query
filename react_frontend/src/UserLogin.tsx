@@ -28,41 +28,37 @@ const UserLogin: React.FC = () => {
   }, []);
 
   return (
-    // <div>
-    //   {data && (
-    //     <div>
-    //       <p>Login: {data.user.login}</p>
-    //       <p>Name: {data.user.name}</p>
-    //       <p>ID: {data.user.id}</p>
-    //       <p>Email: {data.user.email}</p>
-    //       <p>Created At: {data.user.createdAt}</p>
-    //     </div>
-    //   )}
-    // </div>
-    <div>
-      {data && (
-        <table className="user-table">
-          <thead>
-            <tr>
-              <th>Login</th>
-              <th>Name</th>
-              <th>ID</th>
-              {/* <th>Email</th> */}
-              <th>Created At</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{data.user.login}</td>
-              <td>{data.user.name}</td>
-              <td>{data.user.id}</td>
-              {/* <td>{data.user.email}</td> */}
-              <td>{data.user.createdAt}</td>
-            </tr>
-          </tbody>
-        </table>
-      )}
+
+<div className="userlogin-card">
+    <div className="card-header">
+        <h5 className="card-title">GitHub User Login details</h5>
     </div>
+    <div className="card-body">
+        {data && (
+            <table className="table table-striped table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">Username</th>
+                        <td>{data.user.login}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{data.user.name}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ID</th>
+                        <td>{data.user.id}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Created At</th>
+                        <td>{data.user.createdAt}</td>
+                    </tr>
+                </tbody>
+            </table>
+        )}
+    </div>
+</div>
+
   );
 };
 

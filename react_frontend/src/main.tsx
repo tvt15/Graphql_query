@@ -8,3 +8,13 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <App />
   </React.StrictMode>,
 )
+
+// const rootContainer = document.getElementById('root') as HTMLElement;
+
+// ReactDOM.createRoot(rootContainer).render(
+//   <React.StrictMode>
+//     <div style={{ height: '100vh', overflow: 'auto', margin: '0'}}>
+//       <App />
+//     </div>
+//   </React.StrictMode>,
+// );
