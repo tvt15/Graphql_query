@@ -82,14 +82,16 @@ const RepositoryCommits: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="commits-container">
       {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
         <div>
-          <p>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</p>
+          <h2>Repository Commit Analysis</h2><br />
+          <p><h5>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</h5></p>
           <ul>
             {/* Render commit details */}
           </ul>
 
+          <p>This graph represets the number of additions and deletions performed over the total commits on the repository given on a timeline.</p>
           {/* Chart.js Line Chart */}
           <Line data={chartData} />
 

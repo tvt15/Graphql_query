@@ -27,27 +27,27 @@ client = Client(
 @app.route('/api/github/userlogin')
 def fetch_github_data():
     response = client.execute(
-            query=UserLogin(), substitutions={"user": "Chaaand03"}
+            query=UserLogin(), substitutions={"user": "tvt15"}
         )
     return response
 
 @app.route('/api/github/repositorycommits')
 def fetch_github_commits():
     for response in client.execute(query=RepositoryCommits(),
-                               substitutions={"owner": "Chaaand03", "repo_name": "Charge-my-EV" , "pg_size": 100}):
+                               substitutions={"owner": "tvt15", "repo_name": "PathFinder" , "pg_size": 100}):
         return response
 
 @app.route("/api/github/repositorycontributorscontribution")
 def fetch_github_commit():
     response = client.execute(
-            query=RepositoryContributorsContribution(), substitutions={"owner": "Chaaand03", "repo_name":"Charge-my-EV", "id": { "id": "MDQ6VXNlcjg4OTYxNTY5"}}
+            query=RepositoryContributorsContribution(), substitutions={"owner": "tvt15", "repo_name":"PathFinder", "id": { "id": "MDQ6VXNlcjczOTk0NDY2"}}
     )
     return response
 
 @app.route("/api/github/repositorycontributors")
 def fetch_github_contributors():
     response = client.execute(
-            query=RepositoryContributors(), substitutions={"owner": "Chaaand03", "repo_name":"Charge-my-EV"}
+            query=RepositoryContributors(), substitutions={"owner": "tvt15", "repo_name":"PathFinder"}
     )
     return response
 
