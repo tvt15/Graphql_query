@@ -34,15 +34,34 @@ const RepositoryContributors: React.FC<{ owner: string; repoName: string }> = ({
   }, [owner, repoName]);
 
   return (
-    <div>
+    <div className="contributors">
       {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
         <div>
-          <p>Contributors:</p>
-          <ul>
+          <h2>Contributors of this repository {Array.from(
+          new Set(
+            data.repository.defaultBranchRef.target.history.nodes.map(
+              (commit) => commit.author.user.login
+            )
+          )
+        ).length === 1 ? "is:" : "are:"}
+
+          </h2>
+          {/* <ul>
             {data.repository.defaultBranchRef.target.history.nodes.map((commit, index) => (
               <li key={index}>{commit.author.user.login}</li>
             ))}
-          </ul>
+          </ul> */}
+          <ul>
+          {Array.from(
+            new Set(
+              data.repository.defaultBranchRef.target.history.nodes.map(
+                (commit) => commit.author.user.login
+              )
+            )
+          ).map((login, index) => (
+            <li key={index}>{login}</li>
+          ))}
+        </ul>
         </div>
       )}
     </div>

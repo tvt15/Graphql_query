@@ -60,137 +60,18 @@ const RepositoryContributorsContribution: React.FC= () => {
     }
   }, [data]);
 
-  // const chartData = {
-  //   labels: authoredDates,
-  //   datasets: [
-  //     {
-  //       label: "Additions",
-  //       data: additions,
-  //       backgroundColor: "rgba(75,192,192,0.5)", // Green color
-  //       borderColor: "rgba(75,192,192,1)",
-  //     },
-  //     {
-  //       label: "Deletions",
-  //       data: deletions,
-  //       backgroundColor: "rgba(255,99,132,0.5)", // Red color
-  //       borderColor: "rgba(255,99,132,1)",
-  //     },
-  //   ],
-  // };
-
-  // const chartOptions = {
-  //   responsive: true,
-  //   maintainAspectRatio: false,
-  //   scales: {
-  //     x: {
-  //       stacked: true,
-  //       grid: {
-  //         display: false,
-  //       },
-  //       ticks: {
-  //         autoSkip: true,
-  //         maxTicksLimit: 13,
-  //       },
-  //     },
-  //     y: {
-  //       stacked: true,
-  //       grid: {
-  //         color: "#e6e6e6",
-  //         drawBorder: false,
-  //       },
-  //     },
-  //   },
-  //   plugins: {
-  //     legend: {
-  //       display: true,
-  //       position: "top",
-  //     },
-  //   },
-  // };
-
-  // useEffect(() => {
-  //   if (data) {
-  //     const ctx = document.getElementById("myChart") as HTMLCanvasElement;
-  //     if (ctx) {
-  //               // Destroy existing chart instance if it exists
-  //       if (chartRef.current) {
-  //         chartRef.current.destroy()                
-  //       }
-        
-  //       chartRef.current = new Chart(ctx, {
-  //         type: "line",
-  //         data: {
-  //           labels: data.repository?.defaultBranchRef?.target?.history?.nodes.map(
-  //             (commit) => commit.authoredDate
-  //           ) || [],
-  //           datasets: [
-  //             {
-  //               label: "Additions",
-  //               data: data.repository?.defaultBranchRef?.target?.history?.nodes.map(
-  //                 (commit) => commit.additions
-  //               ) || [],
-  //               borderColor: "rgba(75,192,192,1)",
-  //               backgroundColor: "rgba(75,192,192,0.2)",
-  //               fill: false,
-  //             },
-  //           ],
-  //         },
-  //         options: {
-  //           responsive: true,
-  //           maintainAspectRatio: false,
-  //           plugins: {
-  //             title: {
-  //               display: false,
-  //             },
-  //             tooltip: {
-  //               mode: "index",
-  //               intersect: false,
-  //             },
-  //           },
-  //           scales: {
-  //             x: {
-  //               type: "time",
-  //               stacked: true,
-  //               grid: {
-  //                 display: false,
-  //               },
-  //               ticks: {
-  //                 autoSkip: true,
-  //                 maxTicksLimit: 13,
-  //               },
-  //             },
-  //             y: {
-  //               type: "linear",
-  //               stacked: true,
-  //               grid: {
-  //                 color: "#e6e6e6",
-  //               },
-  //             },
-  //           },
-  //         },
-  //       });
-  //     }
-  //   }
-  // }, [data]);
-
   const chartData = {
-    labels: data?.repository?.defaultBranchRef?.target?.history?.nodes.map(
-      (commit) => commit.authoredDate
-    ) || [],
+    labels: authoredDates,
     datasets: [
       {
         label: "Additions",
-        data: data?.repository?.defaultBranchRef?.target?.history?.nodes.map(
-          (commit) => commit.additions
-        ) || [],
+        data: additions,
         backgroundColor: "rgba(75,192,192,0.5)", // Green color
         borderColor: "rgba(75,192,192,1)",
       },
       {
         label: "Deletions",
-        data: data?.repository?.defaultBranchRef?.target?.history?.nodes.map(
-          (commit) => commit.deletions
-        ) || [],
+        data: deletions,
         backgroundColor: "rgba(255,99,132,0.5)", // Red color
         borderColor: "rgba(255,99,132,1)",
       },
@@ -202,7 +83,6 @@ const RepositoryContributorsContribution: React.FC= () => {
     maintainAspectRatio: false,
     scales: {
       x: {
-        type: "time",
         stacked: true,
         grid: {
           display: false,
@@ -228,47 +108,102 @@ const RepositoryContributorsContribution: React.FC= () => {
     },
   };
 
-  return (
-<div>
-    <div className="commit-cards">
-    {data &&
-      data.repository &&
-      data.repository.defaultBranchRef &&
-      data.repository.defaultBranchRef.target &&
-      data.repository.defaultBranchRef.target.history && (
-        <div>
-          <br />
-          <h2>Repository specific information</h2>
-          <br />
-          <p>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</p>
-          <div className="commit-cards-container">
-            {data.repository.defaultBranchRef.target.history.nodes.map((commit, index) => (
-              <div key={index} className="commit-card">
-                <p>Authored Date: {commit.authoredDate}</p>
-                <p>Changed Files If Available: {commit.changedFilesIfAvailable}</p>
-                <p>Additions: {commit.additions}</p>
-                <p>Deletions: {commit.deletions}</p>
-                <p>Commit Message: {commit.message}</p>
-                <p>Parents Total Count: {commit.parents.totalCount}</p>
-                <hr />
-              </div>
-            ))}
-          </div>
-          
-          {/* <canvas id="myChart" /> */}
-          {/* <Bar data={chartData} options={chartOptions as any} /> */}
-        </div>
-      )}
-  </div>
-  <div className="chart-container">
-    {/* <Line data={chartData} options={chartOptions as any} /> */}
-    <Bar data={chartData} options={chartOptions as any} />
-  </div>
-  
-  </div>
-  );
-};
+  // const chartData = {
+  //   labels: data?.repository?.defaultBranchRef?.target?.history?.nodes.map(
+  //     (commit) => commit.authoredDate
+  //   ) || [],
+  //   datasets: [
+  //     {
+  //       label: "Additions",
+  //       data: data?.repository?.defaultBranchRef?.target?.history?.nodes.map(
+  //         (commit) => commit.additions
+  //       ) || [],
+  //       backgroundColor: "rgba(75,192,192,0.5)", // Green color
+  //       borderColor: "rgba(75,192,192,1)",
+  //     },
+  //     {
+  //       label: "Deletions",
+  //       data: data?.repository?.defaultBranchRef?.target?.history?.nodes.map(
+  //         (commit) => commit.deletions
+  //       ) || [],
+  //       backgroundColor: "rgba(255,99,132,0.5)", // Red color
+  //       borderColor: "rgba(255,99,132,1)",
+  //     },
+  //   ],
+  // };
 
-Chart.register(...registerables);
+  // const chartOptions = {
+  //   responsive: true,
+  //   maintainAspectRatio: false,
+  //   scales: {
+  //     x: {
+  //       type: "time",
+  //       stacked: true,
+  //       grid: {
+  //         display: false,
+  //       },
+  //       ticks: {
+  //         autoSkip: true,
+  //         maxTicksLimit: 13,
+  //       },
+  //     },
+  //     y: {
+  //       stacked: true,
+  //       grid: {
+  //         color: "#e6e6e6",
+  //         drawBorder: false,
+  //       },
+  //     },
+  //   },
+  //   plugins: {
+  //     legend: {
+  //       display: true,
+  //       position: "top",
+  //     },
+  //   },
+  // };
+
+  return (
+    <div className="commits-container">
+      {data &&
+        data.repository &&
+        data.repository.defaultBranchRef &&
+        data.repository.defaultBranchRef.target &&
+        data.repository.defaultBranchRef.target.history && (
+          <div className="commits">
+            <br />
+            <h2>Repository specific information</h2>
+            <br />
+            <p><h4>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</h4></p>
+            <table className="commit-table">
+              <thead>
+                <tr>
+                  <th>Authored Date</th>
+                  <th>Changed Files If Available</th>
+                  <th>Additions</th>
+                  <th>Deletions</th>
+                  <th>Commit Message</th>
+                  <th>Parents Total Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.repository.defaultBranchRef.target.history.nodes.map((commit, index) => (
+                  <tr key={index}>
+                    <td>{commit.authoredDate}</td>
+                    <td>{commit.changedFilesIfAvailable}</td>
+                    <td>{commit.additions}</td>
+                    <td>{commit.deletions}</td>
+                    <td>{commit.message}</td>
+                    <td>{commit.parents.totalCount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+    </div>
+);
+
+};
 
 export default RepositoryContributorsContribution;

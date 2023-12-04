@@ -22,6 +22,61 @@
     text-align: left;
   }
 
+/* Add this to your styles or a separate CSS file */
+.commits-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.commits {
+  text-align: center;
+  width: 100%;
+  align-items: center;
+}
+
+.commit-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.commit-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the table layout */
+.commit-table {
+  width: 85%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.commit-table th, .commit-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  background-color: rgb(222, 255, 235);
+}
+
+.commit-table th {
+  background-color: #173d1a;
+  color: antiquewhite;
+}
+
+
+
+  /* .commit-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
   .commit-cards {
     margin-top: 20px;
   }
@@ -31,25 +86,24 @@
     flex-wrap: wrap;
     gap: 20px;
   }
-  
+
   .commit-card {
     border: 1px solid #ddd;
     padding: 16px;
     border-radius: 8px;
-    width: 300px; /* Adjust the width as needed */
+    width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
   
     &:hover {
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
-  }
-/* 
+  } */
+
   body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-} */
+}
 
 .home-container {
     display: flex;
@@ -124,7 +178,6 @@
 
 .chart-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -133,4 +186,15 @@
 .center {
   width: 100%;
   max-width: 800px; /* Set your desired max-width */
+}
+
+.graph-container{
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.contributors{
+  margin-top: 5em;
+  margin-left: 5em;
 }

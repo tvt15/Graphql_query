@@ -11,6 +11,9 @@ import "./styles.css";
 
 const App: React.FC = () => {
     return (
+      // <div>
+      //   <RepositoryContributorsContribution />
+      // </div>
         <Router>
           <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -71,7 +74,7 @@ const App: React.FC = () => {
             </div>
           </div>
         </Router>
-    );
+     );
   };
 
 export default App;

@@ -78,7 +78,7 @@ const RepositoryCommits: React.FC = () => {
   };
 
   return (
-    <div className="chart-container">
+    <div>
       {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
         <div>
           <p>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</p>
@@ -87,10 +87,9 @@ const RepositoryCommits: React.FC = () => {
           </ul>
 
           {/* Chart.js Line Chart */}
-          <div className="center">
-            <Line data={chartData} />
-          </div>
-
+          
+          <Line data={chartData} />
+        
           {data.repository.defaultBranchRef.target.history.pageInfo.hasNextPage && (
             <button>Load More</button>
           )}
@@ -98,6 +97,27 @@ const RepositoryCommits: React.FC = () => {
       )}
     </div>
   );
+  // return (
+  //   <div className="chart-container">
+  //     {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
+  //       <div>
+  //         <p>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</p>
+  //         <ul>
+  //           {/* Render commit details */}
+  //         </ul>
+
+  //         {/* Chart.js Line Chart */}
+          
+  //           <Line data={chartData} />
+          
+
+  //         {data.repository.defaultBranchRef.target.history.pageInfo.hasNextPage && (
+  //           <button>Load More</button>
+  //         )}
+  //       </div>
+  //     )}
+  //   </div>
+  // );
 };
 
 export default RepositoryCommits;
