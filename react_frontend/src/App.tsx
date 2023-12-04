@@ -7,6 +7,7 @@ import RepositoryCommits from "./RepositoryCommits";
 import RepositoryContributorsContribution from "./RepositoryContributorsContribution"
 import RepositoryContributors from "./RepositoryContributors";
 import Home from "./home";
+import UserProfile from "./UserProfile";
 import "./styles.css";
 
 const App: React.FC = () => {
@@ -66,6 +67,10 @@ const App: React.FC = () => {
                       repoName="Pathfinder"
                     />
                   }
+                />
+                <Route
+                path="/userprofile"
+                element={<UserProfile/>}
                 />
               </Routes>
             </div>

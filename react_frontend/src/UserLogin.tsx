@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css"; 
+import UserProfile from "./UserProfile";
 
 // Define the shape of the data you expect from the API, adjust as needed.
 interface User {
@@ -55,6 +56,9 @@ const UserLogin: React.FC = () => {
             </tbody>
           </table>
         )}
+      </div>
+      <div>
+      <UserProfile/>
       </div>
     </div>
   );
