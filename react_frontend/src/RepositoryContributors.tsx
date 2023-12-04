@@ -37,7 +37,7 @@ const RepositoryContributors: React.FC<{ owner: string; repoName: string }> = ({
     <div className="contributors">
       {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
         <div>
-          <h2>Contributors of this repository {Array.from(
+          <h2>Contributor of this repository {Array.from(
           new Set(
             data.repository.defaultBranchRef.target.history.nodes.map(
               (commit) => commit.author.user.login
