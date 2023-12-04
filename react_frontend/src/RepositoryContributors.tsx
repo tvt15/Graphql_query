@@ -46,11 +46,6 @@ const RepositoryContributors: React.FC<{ owner: string; repoName: string }> = ({
         ).length === 1 ? "is:" : "are:"}
 
           </h2>
-          {/* <ul>
-            {data.repository.defaultBranchRef.target.history.nodes.map((commit, index) => (
-              <li key={index}>{commit.author.user.login}</li>
-            ))}
-          </ul> */}
           <ul>
           {Array.from(
             new Set(

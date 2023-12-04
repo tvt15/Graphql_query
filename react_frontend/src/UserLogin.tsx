@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css"; 
 
-// Define the shape of the data you expect from the API, adjust as needed.
 interface User {
   login: string;
   name: string;
