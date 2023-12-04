@@ -78,7 +78,7 @@ const RepositoryCommits: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="chart-container">
       {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
         <div>
           <p>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</p>
@@ -87,7 +87,9 @@ const RepositoryCommits: React.FC = () => {
           </ul>
 
           {/* Chart.js Line Chart */}
-          <Line data={chartData} />
+          <div className="center">
+            <Line data={chartData} />
+          </div>
 
           {data.repository.defaultBranchRef.target.history.pageInfo.hasNextPage && (
             <button>Load More</button>

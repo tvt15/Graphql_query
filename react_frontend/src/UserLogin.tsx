@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./styles.css"; // Import the CSS file for styling
+import "./styles.css"; 
 
 // Define the shape of the data you expect from the API, adjust as needed.
 interface User {
@@ -28,37 +28,35 @@ const UserLogin: React.FC = () => {
   }, []);
 
   return (
-
-<div className="userlogin-card">
-    <div className="card-header">
-        <h5 className="card-title">GitHub User Login details</h5>
-    </div>
-    <div className="card-body">
+    <div className="userlogin-card">
+      <div className="card-header">
+        <h2 className="card-title">GitHub User Login details</h2>
+      </div>
+      <div className="card-body">
         {data && (
-            <table className="table table-striped table-bordered">
-                <tbody>
-                    <tr>
-                        <th scope="row">Username</th>
-                        <td>{data.user.login}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Name</th>
-                        <td>{data.user.name}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">ID</th>
-                        <td>{data.user.id}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Created At</th>
-                        <td>{data.user.createdAt}</td>
-                    </tr>
-                </tbody>
-            </table>
+          <table className="table table-striped table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row">Username</th>
+                <td>{data.user.login}</td>
+              </tr>
+              <tr>
+                <th scope="row">Name</th>
+                <td>{data.user.name}</td>
+              </tr>
+              <tr>
+                <th scope="row">ID</th>
+                <td>{data.user.id}</td>
+              </tr>
+              <tr>
+                <th scope="row">Created At</th>
+                <td>{data.user.createdAt}</td>
+              </tr>
+            </tbody>
+          </table>
         )}
+      </div>
     </div>
-</div>
-
   );
 };
 

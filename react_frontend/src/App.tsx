@@ -1,59 +1,77 @@
 import React from "react";
 import {Container, Nav, Navbar, NavDropdown, Tab} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import UserLogin from "./UserLogin";
 import RepositoryCommits from "./RepositoryCommits";
 import RepositoryContributorsContribution from "./RepositoryContributorsContribution"
 import RepositoryContributors from "./RepositoryContributors";
 import Home from "./home";
+import "./styles.css";
 
-const App = () => {
-  return (
-    <div>
-        {/* <RepositoryContributorsContribution /> */}
-    <div className="fixed-top mt-3 mx-5">
-                <Tab.Container id="tabs" defaultActiveKey="#home">
-                    <Nav variant="tabs" className="mx-3 nav nav-fill">
-                        <Navbar className="text-dark" expand="lg">
-                            <Navbar.Brand>GitHub Info</Navbar.Brand>
-                        </Navbar>
-                        <Nav.Item className="ml-12">
-                            <Nav.Link href="#home" className="text-nowrap">Home</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="#userLogin" className="text-nowrap">User Login</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="#repositoryCommits" className="text-nowrap">Repository Commit</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="#repositoryContributorsContribution" className="text-nowrap">Repository Contributors Commit</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="#repositoryContributors" className="text-nowrap">Repository Contributors</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                    <Tab.Content className="mt-3">
-                        <Tab.Pane eventKey="#home">
-                            <Home/>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="#userLogin">
-                            <UserLogin/>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="#repositoryCommits">
-                            <RepositoryCommits />
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="#repositoryContributorsContribution">
-                            <RepositoryContributorsContribution />
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="#repositoryContributors">
-                            <RepositoryContributors owner="tvt15" repoName="Pathfinder"/>
-                        </Tab.Pane>
-                    </Tab.Content>
-                </Tab.Container>
+const App: React.FC = () => {
+    return (
+        <Router>
+          <div>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+              <div className="container">
+                <Link to="/" className="navbar-brand">
+                  GitHub Info
+                </Link>
+                <div className="collapse navbar-collapse nav nav-fill">
+                  <ul className="navbar-nav">
+                    <li className="nav-item">
+                      <Link to="/" className="nav-link">
+                        Home
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/userlogin" className="nav-link">
+                        User Login
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/commits" className="nav-link">
+                        Repo Commits
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/contributions" className="nav-link">
+                        Contributor's Contributions
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/contributors" className="nav-link">
+                        Contributors
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+            <div className="routes-container">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/userlogin" element={<UserLogin />} />
+                <Route path="/commits" element={<RepositoryCommits />} />
+                <Route
+                  path="/contributions"
+                  element={<RepositoryContributorsContribution />}
+                />
+                <Route
+                  path="/contributors"
+                  element={
+                    <RepositoryContributors
+                      owner="tvt15"
+                      repoName="Pathfinder"
+                    />
+                  }
+                />
+              </Routes>
             </div>
-    </div>
-  );
-};
+          </div>
+        </Router>
+    );
+  };
 
 export default App;
