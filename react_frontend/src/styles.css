@@ -1,3 +1,15 @@
+.app-container {
+  margin: 0;
+  height: 100vh;
+}
+.routes-container{
+  margin-left: 0;
+  padding-left: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+
 .user-table {
     width: 100%;
     border-collapse: collapse;
@@ -32,43 +44,93 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
   }
+/* 
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+} */
 
-  .chart-container {
-    margin-top: 20px;
-  }
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-.form-cointainer{
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  width: 25%;
-}  
+.heading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 2rem;
+    color:aliceblue;
+    background: linear-gradient(to bottom, #006400, #000000);
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem;
+    margin-left: 8em;
+}
 
 .submit{
+  align-items: center;
   text-align: center;
 }
 
-.heading{
-  text-align: center;
-  justify-content: center;
-  padding-bottom: 150px;
-  color: rgb(31, 64, 53);
+.heading h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.heading h4 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.submit {
+    margin-top: 1rem;
 }
 
 .userlogin-card{
-  padding-top: 5em;
+  text-align: center;
+  width: 100%;
 }
+
 .card-header{
+  margin-top: 15em;
   padding-bottom: 3em;
   text-align: center;
-  flex: auto;
+  justify-content: center;
+  margin-left: 33.33em;
 }
 
 .table{
   width: 40%;
   text-align: center;
   justify-content: center;
-  margin-left: 25em;
+  margin-left: 33.66em;
+}
+
+.navbar{
+  margin: 0;
+  width: 100%;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.center {
+  width: 100%;
+  max-width: 800px; /* Set your desired max-width */
 }
