@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef, createRef  } from "react";
 import { Line } from "react-chartjs-2";
+import { Chart } from 'chart.js/auto';
+import {CategoryScale} from 'chart.js'; 
+Chart.register(CategoryScale);
+
 
 interface Commit {
   authoredDate: string;
@@ -45,8 +49,8 @@ const RepositoryCommits: React.FC = () => {
     fetchData();
   }, []);
 
-   // Prepare data for Chart.js
-   const chartData = {
+  // Prepare data for Chart.js
+  const chartData = {
     labels: data?.repository.defaultBranchRef.target.history.nodes.map((commit) => commit.authoredDate) || [],
     datasets: [
       {
@@ -64,18 +68,31 @@ const RepositoryCommits: React.FC = () => {
     ],
   };
 
-
+  // Chart.js options
+  const options = {
+    scales: {
+      x: {
+        type: "linear",
+        position: "bottom",
+      },
+      y: {
+        min: 0,
+      },
+    },
+  };
 
   return (
     <div>
-      <h5>Repository commits details:</h5>
-       {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
+      {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
         <div>
           <p>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</p>
+          <ul>
+            {/* Render commit details */}
+          </ul>
 
-          
-          {/* <Line data={chartData} /> */}
-        
+          {/* Chart.js Line Chart */}
+          <Line data={chartData} />
+
           {data.repository.defaultBranchRef.target.history.pageInfo.hasNextPage && (
             <button>Load More</button>
           )}
@@ -83,27 +100,6 @@ const RepositoryCommits: React.FC = () => {
       )}
     </div>
   );
-  // return (
-  //   <div className="chart-container">
-  //     {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
-  //       <div>
-  //         <p>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</p>
-  //         <ul>
-  //           {/* Render commit details */}
-  //         </ul>
-
-  //         {/* Chart.js Line Chart */}
-          
-  //           <Line data={chartData} />
-          
-
-  //         {data.repository.defaultBranchRef.target.history.pageInfo.hasNextPage && (
-  //           <button>Load More</button>
-  //         )}
-  //       </div>
-  //     )}
-  //   </div>
-  // );
 };
 
 export default RepositoryCommits;
