@@ -28,9 +28,6 @@ interface ApiResponse {
 
 const RepositoryContributorsContribution: React.FC= () => {
   const [data, setData] = useState<ApiResponse | null>(null);
-  const [authoredDates, setAuthoredDates] = useState<string[]>([]);
-  const [additions, setAdditions] = useState<number[]>([]);
-  const [deletions, setDeletions] = useState<number[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,21 +38,6 @@ const RepositoryContributorsContribution: React.FC= () => {
 
     fetchData();
   },[]);
-
-  useEffect(() => {
-    if (data) {
-      const commitNodes = data.repository?.defaultBranchRef?.target?.history?.nodes || [];
-
-      const newAuthoredDates = commitNodes.map((commit) => commit.authoredDate);
-      setAuthoredDates(newAuthoredDates);
-
-      const newAdditions = commitNodes.map((commit) => commit.additions);
-      setAdditions(newAdditions);
-
-      const newDeletions = commitNodes.map((commit) => commit.deletions);
-      setDeletions(newDeletions);
-    }
-  }, [data]);
 
   return (
     <div className="commits-container">
