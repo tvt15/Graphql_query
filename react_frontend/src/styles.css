@@ -24,29 +24,15 @@
 
 /* Add this to your styles or a separate CSS file */
 .commits-container {
-  display: flex;
+  margin-top: 5em;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  padding-left: 7em;
 }
 
 .commits {
-  text-align: center;
-  width: 100%;
   align-items: center;
-}
-
-.commit-cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.commit-card {
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Styles for the table layout */
@@ -54,6 +40,7 @@
   width: 85%;
   border-collapse: collapse;
   margin-top: 20px;
+  align-items: center;
 }
 
 .commit-table th, .commit-table td {

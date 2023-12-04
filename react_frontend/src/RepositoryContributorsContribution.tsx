@@ -174,7 +174,7 @@ const RepositoryContributorsContribution: React.FC= () => {
             <br />
             <h2>Repository specific information</h2>
             <br />
-            <p><h4>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</h4></p>
+            <h4>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</h4>
             <table className="commit-table">
               <thead>
                 <tr>

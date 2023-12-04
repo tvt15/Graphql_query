@@ -64,31 +64,17 @@ const RepositoryCommits: React.FC = () => {
     ],
   };
 
-  // Chart.js options
-  const options = {
-    scales: {
-      x: {
-        type: "linear",
-        position: "bottom",
-      },
-      y: {
-        min: 0,
-      },
-    },
-  };
+
 
   return (
     <div>
-      {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
+      <h5>Repository commits details:</h5>
+       {data && data.repository && data.repository.defaultBranchRef && data.repository.defaultBranchRef.target && data.repository.defaultBranchRef.target.history && (
         <div>
           <p>Total Commits: {data.repository.defaultBranchRef.target.history.totalCount}</p>
-          <ul>
-            {/* Render commit details */}
-          </ul>
 
-          {/* Chart.js Line Chart */}
           
-          <Line data={chartData} />
+          {/* <Line data={chartData} /> */}
         
           {data.repository.defaultBranchRef.target.history.pageInfo.hasNextPage && (
             <button>Load More</button>
