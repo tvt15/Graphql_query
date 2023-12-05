@@ -58,6 +58,7 @@
   body {
     margin: 0;
     padding: 0;
+
 }
 
 .home-container {
@@ -112,11 +113,17 @@
 }
 
 .card-header{
-  margin-top: 15em;
-  padding-bottom: 3em;
+  margin-top: 10em;
+  padding-bottom: 2em;
   text-align: center;
   justify-content: center;
   margin-left: 33.33em;
+}
+
+.card-body{
+  display: 'flex'; 
+  align-items: center;
+  justify-content: center;
 }
 
 .table{

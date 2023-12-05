@@ -23,8 +23,8 @@ const UserProfile = () => {
     <div>
       {userData && (
         <div>
-          <h2>{userData?.login}</h2>
-          <img src={userData?.avatar_url} alt="User Avatar" />
+          {/* <h2>{userData?.login}</h2> */}
+          <img src={userData?.avatar_url} alt="User Avatar" style={{ height: '100px', width: '100px' }} />
         </div>
       )}
     </div>
