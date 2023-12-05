@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./styles.css";
+import { useAppContext } from './AppContext';
+
 
 
 interface Commit {
@@ -28,10 +30,11 @@ interface ApiResponse {
 
 const RepositoryContributorsContribution: React.FC= () => {
   const [data, setData] = useState<ApiResponse | null>(null);
+  const { user, repo_name, uid} = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/github/repositorycontributorscontribution");
+      const response = await fetch(`/api/github/repositorycontributorscontribution?owner=${user}&repo_name=${repo_name}&uid=${uid}`);
       const result: ApiResponse = await response.json();
       setData(result);
     };

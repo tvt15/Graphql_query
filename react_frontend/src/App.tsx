@@ -9,9 +9,11 @@ import RepositoryContributors from "./RepositoryContributors";
 import Home from "./home";
 import UserProfile from "./UserProfile";
 import "./styles.css";
+import { AppProvider } from './AppContext';
 
 const App: React.FC = () => {
     return (
+      <AppProvider>
         <Router>
           <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -76,6 +78,7 @@ const App: React.FC = () => {
             </div>
           </div>
         </Router>
+      </AppProvider>
      );
   };
 

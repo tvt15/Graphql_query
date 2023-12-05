@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAppContext } from './AppContext';
 
 interface Contributor {
   login: string;
@@ -22,16 +23,17 @@ interface ApiResponse {
 
 const RepositoryContributors: React.FC<{ owner: string; repoName: string }> = ({ owner, repoName }) => {
   const [data, setData] = useState<ApiResponse | null>(null);
+  const { user, repo_name } = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/github/repositorycontributors?owner=${owner}&repo_name=${repoName}");
+      const response = await fetch(`/api/github/repositorycontributors?owner=${user}&repo_name=${repo_name}`);
       const result: ApiResponse = await response.json();
       setData(result);
     };
 
     fetchData();
-  }, [owner, repoName]);
+  }, [user, repoName]);
 
   return (
     <div className="contributors">

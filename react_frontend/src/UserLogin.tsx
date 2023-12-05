@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css"; 
 import UserProfile from "./UserProfile";
+import { useAppContext } from './AppContext';
 
 interface User {
   login: string;
@@ -16,16 +17,17 @@ interface ApiResponse {
 
 const UserLogin: React.FC = () => {
   const [data, setData] = useState<ApiResponse | null>(null);
+  const { user, repo_name } = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/github/userlogin");
+      const response = await fetch(`/api/github/userlogin?user=${user}`);
       const result: ApiResponse = await response.json();
       setData(result);
     };
 
     fetchData();
-  }, []);
+  }, [user, repo_name]);
 
   return (
     <div className="userlogin-card">

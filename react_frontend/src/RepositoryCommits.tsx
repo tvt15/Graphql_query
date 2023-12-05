@@ -3,6 +3,7 @@ import { Line } from "react-chartjs-2";
 import { Chart } from 'chart.js/auto';
 import {CategoryScale} from 'chart.js'; 
 Chart.register(CategoryScale);
+import { useAppContext } from './AppContext';
 
 
 interface Commit {
@@ -38,10 +39,11 @@ interface ApiResponse {
 
 const RepositoryCommits: React.FC = () => {
   const [data, setData] = useState<ApiResponse | null>(null);
+  const { user, repo_name} = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/github/repositorycommits");
+      const response = await fetch(`/api/github/repositorycommits?owner=${user}&repo_name=${repo_name}&pg_size=${100}`);
       const result: ApiResponse = await response.json();
       setData(result);
     };

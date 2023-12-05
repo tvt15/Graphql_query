@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 import os
 
@@ -26,28 +26,37 @@ client = Client(
 
 @app.route('/api/github/userlogin')
 def fetch_github_data():
+    username= request.args.get("user")
     response = client.execute(
-            query=UserLogin(), substitutions={"user": "tvt15"}
+            query=UserLogin(), substitutions={"user": username}
         )
     return response
 
 @app.route('/api/github/repositorycommits')
 def fetch_github_commits():
+    username = request.args.get("owner")
+    repo_name = request.args.get("repo_name")
+    pg_size = request.args.get("pg_size")
     for response in client.execute(query=RepositoryCommits(),
-                               substitutions={"owner": "tvt15", "repo_name": "PathFinder" , "pg_size": 100}):
+                               substitutions={"owner": username, "repo_name": repo_name , "pg_size": pg_size}):
         return response
 
 @app.route("/api/github/repositorycontributorscontribution")
 def fetch_github_commit():
+    username = request.args.get("owner")
+    repo_name = request.args.get("repo_name")
+    uid = request.args.get("uid")
     response = client.execute(
-            query=RepositoryContributorsContribution(), substitutions={"owner": "tvt15", "repo_name":"PathFinder", "id": { "id": "MDQ6VXNlcjczOTk0NDY2"}}
+            query=RepositoryContributorsContribution(), substitutions={"owner": username, "repo_name":repo_name, "id": { "id": uid}}
     )
     return response
 
 @app.route("/api/github/repositorycontributors")
 def fetch_github_contributors():
+    username = request.args.get("owner")
+    repo_name = request.args.get("repo_name")
     response = client.execute(
-            query=RepositoryContributors(), substitutions={"owner": "tvt15", "repo_name":"PathFinder"}
+            query=RepositoryContributors(), substitutions={"owner": username, "repo_name":repo_name}
     )
     return response
 

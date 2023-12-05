@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useAppContext } from './AppContext';
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null as null | { login: string; avatar_url: string } | undefined);
+  const { user } = useAppContext();
 
   useEffect(() => {
-    const username = 'tvt15';
+    const username = user;
 
     const fetchUserData = async () => {
       try {
