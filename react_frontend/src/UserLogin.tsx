@@ -32,7 +32,8 @@ const UserLogin: React.FC = () => {
   return (
     <div className="userlogin-card">
       <div className="card-header">
-        <h2 className="card-title">GitHub User Login details</h2>
+        <h2 className="card-title">GitHub User Login details</h2><br />
+        <UserProfile/>
       </div>
       <div className="card-body">
         {data && (
@@ -57,9 +58,6 @@ const UserLogin: React.FC = () => {
             </tbody>
           </table>
         )}
-      </div>
-      <div>
-      <UserProfile/>
       </div>
     </div>
   );
