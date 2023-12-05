@@ -45,11 +45,6 @@ const Home: React.FC = () => {
               <input type="text" value={uid} onChange={handleInputChange} className="form-control" id="uid" placeholder="Enter repository name"></input>
             </div>
           </div>
-          <div className="submit">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
         </form>
       </div>
     </div>
