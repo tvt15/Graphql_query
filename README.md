@@ -68,7 +68,7 @@ This repository contains a simple web-based User Interface (UI) for fetching and
 6. **Querying Another Metric:**
    - To query another metric or information for a different repository or user, users can return to the homepage and start the process afresh.
 
-## Execution
+## Execution Phase 2
 
 ### Terminal :
 
@@ -100,6 +100,12 @@ flask run
 Sign up react app:
 ```
 npm run dev
+```
+We have also hosted the page in the VCL. Following is the steps to host in VCL :
+```
+sudo iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 5173 -j ACCEPT
+sudo ufw allow 5173
+sudo ufw reload
 ```
 # React Frontend Workflow 
 
