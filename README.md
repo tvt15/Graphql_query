@@ -36,6 +36,10 @@ pip install -r requirements.txt
 
 This repository contains a simple web-based User Interface (UI) for fetching and displaying information related to Github users and repositories. The UI is designed to provide users with a convenient way to retrieve and visualize specific details about a Github user and their repositories.
 
+## Link to hosted image on VCL
+
+      http://152.7.177.4:5173/
+
 ## Usage
 
 1. **Homepage Input:**
@@ -655,10 +659,10 @@ query ($dryrun: Boolean!){
 
 ## UI screenshots
 
-![WhatsApp Image 2023-12-04 at 10 01 28 PM](https://media.github.ncsu.edu/user/30678/files/f67ef784-f404-4b6c-8b0f-67b5429d2c3c)
-![WhatsApp Image 2023-12-04 at 10 01 05 PM](https://media.github.ncsu.edu/user/30678/files/4dfab227-470f-42bd-9cef-da0053b2ee03)
-![WhatsApp Image 2023-12-04 at 10 00 14 PM](https://media.github.ncsu.edu/user/30678/files/43acdb76-8dba-4787-b0f0-923379a0585b)
 ![WhatsApp Image 2023-12-04 at 9 59 43 PM](https://media.github.ncsu.edu/user/30678/files/4dfde858-8e34-4ab4-81b9-d052ce9c5d3d)
+![WhatsApp Image 2023-12-04 at 10 00 14 PM](https://media.github.ncsu.edu/user/30678/files/43acdb76-8dba-4787-b0f0-923379a0585b)
+![WhatsApp Image 2023-12-04 at 10 01 05 PM](https://media.github.ncsu.edu/user/30678/files/4dfab227-470f-42bd-9cef-da0053b2ee03)
+![WhatsApp Image 2023-12-04 at 10 01 28 PM](https://media.github.ncsu.edu/user/30678/files/f67ef784-f404-4b6c-8b0f-67b5429d2c3c)
 
 # GitLab Metrics
 
