@@ -21,13 +21,13 @@ interface ApiResponse {
   };
 }
 
-const RepositoryContributors: React.FC<{ owner: string; repoName: string }> = ({ owner, repoName }) => {
+const RepositoryContributors: React.FC=()=>{
   const [data, setData] = useState<ApiResponse | null>(null);
-  const { user, repo_name } = useAppContext();
+  const { user, repoName } = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`/api/github/repositorycontributors?owner=${user}&repo_name=${repo_name}`);
+      const response = await fetch(`/api/github/repositorycontributors?owner=${user}&repoName=${repoName}`);
       const result: ApiResponse = await response.json();
       setData(result);
     };

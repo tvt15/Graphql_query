@@ -39,11 +39,11 @@ interface ApiResponse {
 
 const RepositoryCommits: React.FC = () => {
   const [data, setData] = useState<ApiResponse | null>(null);
-  const { user, repo_name} = useAppContext();
+  const { user, repoName} = useAppContext();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`/api/github/repositorycommits?owner=${user}&repo_name=${repo_name}&pg_size=${100}`);
+      const response = await fetch(`/api/github/repositorycommits?owner=${user}&repoName=${repoName}&pgSize=${100}`);
       const result: ApiResponse = await response.json();
       setData(result);
     };
@@ -68,19 +68,6 @@ const RepositoryCommits: React.FC = () => {
         fill: false,
       },
     ],
-  };
-
-  // Chart.js options
-  const options = {
-    scales: {
-      x: {
-        type: "linear",
-        position: "bottom",
-      },
-      y: {
-        min: 0,
-      },
-    },
   };
 
   return (
