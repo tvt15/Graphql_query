@@ -4,9 +4,9 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface AppContextProps {
   user: string;
-  repo_name: string;
+  repoName: string;
   uid:string;
-  setUserInfo: (user: string, repo_name: string, uid:string) => void;
+  setUserInfo: (user: string, repoName: string, uid:string) => void;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -17,7 +17,7 @@ interface AppProviderProps {
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [user, setUser] = useState<string>('');
-  const [repo_name, setRepoName] = useState<string>('');
+  const [repoName, setRepoName] = useState<string>('');
   const [uid, setUid] = useState<string>('');
 
   const setUserInfo = (newUser: string, newRepoName: string, newUid: string) => {
@@ -27,7 +27,7 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ user, repo_name, uid, setUserInfo }}>
+    <AppContext.Provider value={{ user, repoName: repoName, uid, setUserInfo }}>
       {children}
     </AppContext.Provider>
   );
