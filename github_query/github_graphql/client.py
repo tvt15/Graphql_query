@@ -39,7 +39,7 @@ class Client:
 
     def __init__(self,
                  protocol: str = "https",
-                 host: str = "gitlab.com/api",
+                 host: str = "api.github.com",
                  is_enterprise: bool = False,   
                  authenticator: Authenticator = None):
         """
@@ -126,9 +126,26 @@ class Client:
             Response as a JSON
         """
         query_string = Template(query).substitute(**substitutions) if isinstance(query, str) else query.substitute(**substitutions)
-        # match = re.search(r'query\s*{(?P<content>.+)}', query_string)
-        # rate_query = QueryCost(match.group('content'))
-        response = self._retry_request(3, 10, query_string, substitutions)
+        match = re.search(r'query\s*{(?P<content>.+)}', query_string)
+        rate_query = QueryCost(match.group('content'))
+        rate_limit = self._retry_request(3, 10, rate_query, {"dryrun": True})
+        # print(rate_limit.json)
+        # rate_limit = rate_limit.json()["data"]["rateLimit"] 
+        # cost = rate_limit['cost']
+        # remaining = rate_limit['remaining']
+        # reset_at = rate_limit['resetAt']
+        # if cost > remaining - 5:
+        #     current_time = datetime.utcnow()
+        #     time_format = '%Y-%m-%dT%H:%M:%SZ'
+        #     reset_at = datetime.strptime(reset_at, time_format)
+        #     time_diff = reset_at - current_time
+        #     seconds = time_diff.total_seconds()
+        #     print(f"stop at {current_time}s.")
+        #     print(f"waiting for {seconds}s.")
+        #     print(f"reset at {reset_at}s.")
+        #     time.sleep(seconds + 5)
+
+        response = self._retry_request(3, 10, query, substitutions)
 
         try:
             json_response = response.json()
@@ -140,6 +157,7 @@ class Client:
             return json_response["data"]
         else:
             raise QueryFailedException(query=query, response=response)
+        
     def execute(self, query: Union[str, Query, PaginatedQuery], substitutions: dict):
         """
         Executes a query after substituting values. The query could be a Query or a PaginatedQuery.

@@ -32,8 +32,112 @@ then you can
 pip install -r requirements.txt
 ```
 
-## Execution
-TBD
+# UI Documentation
+
+This repository contains a simple web-based User Interface (UI) for fetching and displaying information related to Github users and repositories. The UI is designed to provide users with a convenient way to retrieve and visualize specific details about a Github user and their repositories.
+
+## Link to hosted image on VCL
+
+      http://152.7.177.4:5173/
+
+## Usage
+
+1. **Homepage Input:**
+   - Upon accessing the homepage, users will be prompted to enter their Github username and the name of the repository they are interested in.
+
+2. **User Information:**
+   - After entering the required information, users can view the following details about the Github user:
+     - User login information: username, Name, ID, Created At, and the user's profile picture.
+
+3. **Repository Information:**
+   - Additionally, users can access repository-specific information, including:
+     - Total number of commits.
+     - Authored Date.
+     - Changed files (if available).
+     - Additions.
+     - Deletions.
+     - Commit changes.
+     - Commit message.
+
+4. **Contributors:**
+   - The UI provides a list of usernames for contributors to the specified repository.
+
+5. **Commits Graph:**
+   - A graphical representation of the number of additions and deletions performed over the total commits on the specified repository is displayed on a timeline.
+
+6. **Querying Another Metric:**
+   - To query another metric or information for a different repository or user, users can return to the homepage and start the process afresh.
+
+## Execution Phase 2
+
+### Terminal :
+
+To install all the necessary npm packages:
+cd into the react_frontend folder
+```Terminal
+npm install
+```
+Spin up flask server:
+For Mac:
+```
+export FLASK_APP=server.py
+```
+```
+export FLASK_ENV=development
+```
+To run the flask application
+For Windows:
+```
+set FLASK_APP=server.py
+```
+```
+set FLASK_ENV=development
+```
+```
+flask run
+```
+
+Sign up react app:
+```
+npm run dev
+```
+We have also hosted the page in the VCL. Following is the steps to host in VCL :
+```
+sudo iptables -I INPUT -p tcp -s 0.0.0.0/0 --dport 5173 -j ACCEPT
+sudo ufw allow 5173
+sudo ufw reload
+```
+# React Frontend Workflow 
+
+This section provides a concise overview of the workflow within the React frontend of the application.
+
+1. **User Input:**
+   - Users input their Github username, repository name, and user ID on the webpage.
+
+2. **Communication with Backend:**
+   - The entered information is sent to the backend server for processing.
+
+3. **GraphQL Query Building:**
+   - The backend server, equipped with a GraphQL query builder, creates a specific query based on the user input.
+
+4. **GraphQL Request:**
+   - The constructed GraphQL query is sent to Github to access the desired metrics.
+
+5. **Github API Interaction:**
+   - Github processes the request and sends back the response in JSON format.
+
+6. **Response Handling:**
+   - The backend server receives and interprets the JSON response from Github.
+
+7. **Rendering on Webpage:**
+   - The backend server renders the relevant information from the Github response on the webpage.
+
+8. **User Interaction:**
+   - Users can now interact with the webpage to explore and visualize the requested Github metrics.
+
+The React frontend serves as the user interface, facilitating user input and communicating with the backend server. The backend server, utilizing GraphQL, communicates with the Github API to fetch and display the specified metrics on the webpage for user interaction.
+
+![WhatsApp Image 2023-12-04 at 11 33 58 PM](https://media.github.ncsu.edu/user/30678/files/1acf018f-cdb9-4513-8b10-1668d3586def)
 
 ### authentication  — Basic authenticator class
 Source code: [github_graphql/authentication.py]()
@@ -559,8 +663,13 @@ query ($dryrun: Boolean!){
 </tr>
 </table>
 
+## UI screenshots
 
-
+![WhatsApp Image 2023-12-04 at 9 59 43 PM](https://media.github.ncsu.edu/user/30678/files/4dfde858-8e34-4ab4-81b9-d052ce9c5d3d)
+![WhatsApp Image 2023-12-04 at 10 18 53 PM](https://media.github.ncsu.edu/user/30678/files/e9d79618-5f02-492e-8198-064cfec874c4)
+![WhatsApp Image 2023-12-04 at 10 00 14 PM](https://media.github.ncsu.edu/user/30678/files/43acdb76-8dba-4787-b0f0-923379a0585b)
+![WhatsApp Image 2023-12-04 at 10 01 05 PM](https://media.github.ncsu.edu/user/30678/files/4dfab227-470f-42bd-9cef-da0053b2ee03)
+![WhatsApp Image 2023-12-04 at 10 01 28 PM](https://media.github.ncsu.edu/user/30678/files/f67ef784-f404-4b6c-8b0f-67b5429d2c3c)
 
 # GitLab Metrics
 
