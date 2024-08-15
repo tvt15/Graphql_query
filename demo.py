@@ -18,8 +18,8 @@ client = Client(
     authenticator=PersonalAccessTokenAuthenticator(token=os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN"))
 )
 
-owner = "tripurashree"
-repository = "slash"
+owner = "tvt15"
+repository = "TVT-s_Inventory_Manager"
 response = client.execute(query=RepositoryContributors(),
                           substitutions={"owner": owner, "repo_name": repository})
 
