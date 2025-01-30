@@ -1,0 +1,36 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up SSH and Deploy
+        env:
+          PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          HOST: ${{ secrets.EC2_HOST }}
+          USER: ${{ secrets.EC2_USER }}
+          PROJECT_DIR: "/home/ubuntu/flask-app" 
+        run: |
+          echo "$PRIVATE_KEY" > private_key.pem
+          chmod 600 private_key.pem
+
+          ssh -o StrictHostKeyChecking=no -i private_key.pem $USER@$HOST << 'EOF'
+            cd $PROJECT_DIR
+            git pull origin main
+            source venv/bin/activate  # Ensure virtual environment is activated
+            pip install -r requirements.txt
+            sudo systemctl restart flask-app  
+            exit
+          EOF
+          
+      - name: Cleanup SSH Key
+        run: rm -f private_key.pem
